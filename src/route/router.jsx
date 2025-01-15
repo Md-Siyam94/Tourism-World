@@ -3,6 +3,8 @@ import {
   } from "react-router-dom";
 import MainLayout from "../layout/MainLayout";
 import Home from "../pages/Home/Home";
+import Login from "../pages/Login/Login";
+import SignUp from "../pages/SignUp/SignUp";
 
 
 
@@ -15,8 +17,15 @@ import Home from "../pages/Home/Home";
       children: [
         {
             path: "/",
-            element: <Home></Home>
-           
+            element: <Home></Home>     
+        },
+        {
+            path: "/login",
+            element: <Login></Login>
+        },
+        {
+            path: "/sign-up",
+            element: <SignUp></SignUp>
         },
       ]
     },
