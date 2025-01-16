@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 
 
 const AboutUs = () => {
+    // TODO: customise this section
     return (
         <div className="max-w-7xl mx-auto border">
             <h1 className="text-3xl">About us</h1>

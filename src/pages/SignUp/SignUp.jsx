@@ -3,7 +3,8 @@ import { useForm } from 'react-hook-form';
 import { BiImageAdd } from 'react-icons/bi';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import useAuth from '../../custom hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import SocialLogin from '../shared/SocialLogin';
 
 const SignUp = () => {
     const [showPass, setShowPass] = useState(false)
@@ -97,6 +98,11 @@ const SignUp = () => {
                         <div className="form-control mt-6">
                             <button className="btn bg-teal-600 hover:bg-teal-700 text-white">Sign up</button>
                         </div>
+                        <div>
+                            <p className='text-center mt-2'>Don't have any account ? <Link to={"/login"} className='text-blue-800 font-semibold'>Login</Link></p>
+                        </div>
+                        <div className="divider"></div>
+                        <SocialLogin></SocialLogin>
                     </form>
                 </div>
             </div>

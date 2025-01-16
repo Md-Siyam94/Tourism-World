@@ -3,18 +3,24 @@ import useAuth from "../../custom hooks/useAuth";
 
 
 const Navbar = () => {
-    const {name} = useAuth()
+    const { user, logOutUser } = useAuth()
     const links = <>
         <li><NavLink to={"/"}>Home</NavLink></li>
         <li><NavLink to={"/community"}>Community</NavLink></li>
         <li><NavLink to={"/about-us"}>About Us</NavLink></li>
         <li><NavLink to={"/trips"}>Trips</NavLink></li>
 
-       
+
     </>
 
-    const handleLogOut =()=>{
-        // TODO: log out the user
+    const handleLogOut = () => {
+        logOutUser()
+            .then(() => {
+
+            })
+            .catch(err => {
+                console.log("error from log out", err);
+            })
     }
     return (
         <div>
@@ -45,35 +51,37 @@ const Navbar = () => {
                     </div>
                     <a className="btn btn-ghost text-xl">TourismWorld</a>
                 </div>
-                
+
                 <div className="navbar-end">
-                <div className="navbar-center hidden lg:flex mr-3">
-                    <ul className="menu menu-horizontal px-1">
-                        {
-                            links
-                        }
-                    </ul>
-                </div>
-               <div>
-                {
-                    name
-                }
-               </div>
-                    <div className="dropdown dropdown-end ">
-                        <div tabIndex={0} role="button" className="">Click</div>
-                        <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                            <li><button >
-                                {/* TODO: user email */}
-                                Email
-                                </button></li>
-                            <li><button>
-                                {/* TODO: user name */}
-                                Name
-                                </button></li>            
-                            <li><Link>Dashboard</Link></li>
-                            <li><button onClick={handleLogOut}>Log Out</button></li>
+                    <div className="navbar-center hidden lg:flex mr-3">
+                        <ul className="menu menu-horizontal px-1">
+                            {
+                                links
+                            }
                         </ul>
                     </div>
+                    {
+                        user ? <div className="dropdown dropdown-end ">
+                            <div tabIndex={0} role="button" > <img
+                                className="h-10 w-10 rounded-full"
+                                referrerPolicy="no-referrer"
+                                src={user?.photoURL}
+                                alt="" />
+                            </div>
+                            <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-10 w-52 p-2 shadow">
+                                <div className="px-4 mb-4 opacity-70">
+                                    <p > {user?.displayName} </p>
+                                    <p>{user?.email}</p>
+                                </div>
+
+                                <li><Link>Dashboard</Link></li>
+                                <li><button className="" onClick={handleLogOut}>Log Out</button></li>
+                            </ul>
+                        </div> : <div className="flex gap-2">
+                            <button className="btn"> <Link to={"/login"}>Login </Link></button>
+                            <button className="btn"> <Link to={"/sign-up"}>Sign up</Link></button>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

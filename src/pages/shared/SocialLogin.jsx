@@ -7,10 +7,15 @@ const SocialLogin = () => {
     const {loginWithGoogle} = useAuth()
     const location = useLocation();
     const navigate = useNavigate();
+
+
     const handleGoogleLogin =()=>{
         loginWithGoogle()
         .then(result=>{
-            navigate(location?.pathname ? location?.pathname : "/")
+            navigate("/")
+        })
+        .catch(err=>{
+            console.log("error from google login", err);
         })
     }
     return (
