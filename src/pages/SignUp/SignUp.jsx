@@ -3,10 +3,12 @@ import { useForm } from 'react-hook-form';
 import { BiImageAdd } from 'react-icons/bi';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import useAuth from '../../custom hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
     const [showPass, setShowPass] = useState(false)
     const {signUpUser, updateUserProfile}= useAuth()
+    const navigate = useNavigate()
 
 
 
@@ -21,6 +23,7 @@ const SignUp = () => {
             updateUserProfile(updatedInfo)
             .then(result=>{
                 // TODO: save user data in database
+                navigate("/")
             })
             .catch(err=>{
                 console.log("error from updating profile", err);
@@ -48,14 +51,20 @@ const SignUp = () => {
                             <label className="label">
                                 <span className="label-text">Name</span>
                             </label>
-                            <input type="text" {...register("name", {required: true})} placeholder="Your name" className="input input-bordered" required />
+                            <input type="text" {...register("name", {required: true})} placeholder="Your name" className="input input-bordered"  />
+                            <div className='mt-2'>
+                                {errors.name?.type === 'required' && <p role="alert" className='text-red-600'>Type your name in this field !</p>}
+                            </div>
                         </div>
                         {/* Email field */}
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input type="email" {...register("email", {required: true})} placeholder="Email" className="input input-bordered" required />
+                            <input type="email" {...register("email", {required: true})} placeholder="Email" className="input input-bordered" />
+                            <div className='mt-2'>
+                                {errors.email?.type === 'required' && <p role="alert" className='text-red-600'>Type your email in this field !</p>}
+                            </div>
                         </div>
                         {/* Image field */}
                         <label className="form-control w-full max-w-xs">
