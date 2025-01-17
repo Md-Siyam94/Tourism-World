@@ -5,34 +5,52 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import useAuth from '../../custom hooks/useAuth';
 import { Link, useNavigate } from 'react-router-dom';
 import SocialLogin from '../shared/SocialLogin';
+import useAxiosPublic from '../../custom hooks/useAxiosPublic';
+
+
+
+
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 
 const SignUp = () => {
     const [showPass, setShowPass] = useState(false)
     const {signUpUser, updateUserProfile}= useAuth()
+    const axiosPublic = useAxiosPublic()
     const navigate = useNavigate()
 
 
 
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => {
-        console.log(data)
+    const onSubmit = async (data) => {
+        // console.log(data)
         const name = data.name;
-        const photoURL= data.photoURL;
-        const updatedInfo = {displayName: name, photoURL:photoURL}
-        signUpUser(data.email, data.password)
-        .then(()=>{
-            updateUserProfile(updatedInfo)
-            .then(result=>{
-                // TODO: save user data in database
-                navigate("/")
+        const imageFile=  {image: data.photoURL[0]};
+        console.log(imageFile);
+        const res = await axiosPublic.post(image_hosting_api,imageFile,{
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        })
+        if(res.data.success){
+            signUpUser(data.email, data.password)
+            .then(()=>{
+                updateUserProfile({displayName: name, photoURL:res.data.data.display_url})
+                .then( (result)=>{
+                    // TODO: save user data in database
+                   
+                    navigate("/")
+                })
+                .catch(err=>{
+                    console.log("error from updating profile", err);
+                })
             })
             .catch(err=>{
-                console.log("error from updating profile", err);
+                console.log("error from sign up", err);
             })
-        })
-        .catch(err=>{
-            console.log("error from sign up", err);
-        })
+        }
+       console.log(res.data);
+       
     };
     return (
         <div className="hero bg-base-200 min-h-screen">

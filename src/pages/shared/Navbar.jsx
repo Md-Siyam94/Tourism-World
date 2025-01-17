@@ -63,18 +63,18 @@ const Navbar = () => {
                     {
                         user ? <div className="dropdown dropdown-end ">
                             <div tabIndex={0} role="button" > <img
-                                className="h-10 w-10 rounded-full"
+                                className="h-10 w-10 rounded-full object-cover"
                                 referrerPolicy="no-referrer"
                                 src={user?.photoURL}
                                 alt="" />
                             </div>
                             <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-10 w-52 p-2 shadow">
                                 <div className="px-4 mb-4 opacity-70">
-                                    <p > {user?.displayName} </p>
-                                    <p>{user?.email}</p>
+                                     {user?.displayName} <br />
+                                    {user?.email}
                                 </div>
 
-                                <li><Link>Dashboard</Link></li>
+                                <li><Link to={"/dashboard"}>Dashboard</Link></li>
                                 <li><button className="" onClick={handleLogOut}>Log Out</button></li>
                             </ul>
                         </div> : <div className="flex gap-2">

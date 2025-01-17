@@ -8,6 +8,9 @@ import SignUp from "../pages/SignUp/SignUp";
 import AboutUs from "../pages/About us/AboutUs";
 import PackageDetails from "../pages/Package details/PackageDetails";
 import AllTrips from "../pages/All Trips/AllTrips";
+import PrivetRoute from "../provider/PrivetRoute";
+import Dashboard from "../layout/Dashboard";
+import TouristProfile from "../pages/Dashboard/Tourist/Manage Profile/TouristProfile";
 
 
 
@@ -28,7 +31,7 @@ import AllTrips from "../pages/All Trips/AllTrips";
         },
         {
             path: "/trips",
-            element: <AllTrips></AllTrips>     
+            element: <PrivetRoute><AllTrips></AllTrips></PrivetRoute>     
         },
         {
             path: "/package-details/:id",
@@ -43,6 +46,18 @@ import AllTrips from "../pages/All Trips/AllTrips";
             path: "/sign-up",
             element: <SignUp></SignUp>
         },
+        {
+          path:"/dashboard",
+          element: <Dashboard></Dashboard>,
+          // TODO: SHOW ERROR
+          // errorElement: <div></div>,
+          children: [
+            {
+              path: "/dashboard/tourist-profile",
+              element: <TouristProfile></TouristProfile>
+            }
+          ]
+        }
       ]
     },
   ]);
