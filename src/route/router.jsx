@@ -10,7 +10,10 @@ import PackageDetails from "../pages/Package details/PackageDetails";
 import AllTrips from "../pages/All Trips/AllTrips";
 import PrivetRoute from "../provider/PrivetRoute";
 import Dashboard from "../layout/Dashboard";
-import TouristProfile from "../pages/Dashboard/Tourist/Manage Profile/TouristProfile";
+import TouristProfile from "../pages/Dashboard/Tourist/Manage Profile/TouristProfile"
+import AddStories from "../pages/Dashboard/Tourist/Add Stories/AddStories";
+import JoinAsGuide from "../pages/Dashboard/Tourist/Join as Guide/JoinAsGuide";
+
 
 
 
@@ -46,20 +49,30 @@ import TouristProfile from "../pages/Dashboard/Tourist/Manage Profile/TouristPro
             path: "/sign-up",
             element: <SignUp></SignUp>
         },
-        {
-          path:"/dashboard",
-          element: <Dashboard></Dashboard>,
-          // TODO: SHOW ERROR
-          // errorElement: <div></div>,
-          children: [
-            {
-              path: "/dashboard/tourist-profile",
-              element: <TouristProfile></TouristProfile>
-            }
-          ]
-        }
+       
       ]
     },
+    {
+      path:"/dashboard",
+      element: <PrivetRoute> <Dashboard></Dashboard></PrivetRoute>,
+      // TODO: SHOW ERROR
+      // errorElement: <div></div>,
+      children: [
+        // tourist routes
+        {
+          path: "/dashboard",
+          element: <TouristProfile></TouristProfile>
+        },
+        {
+          path: "/dashboard/add-stories",
+          element: <AddStories></AddStories>
+        },
+        {
+          path: "/dashboard/join-tour-guide",
+          element: <JoinAsGuide></JoinAsGuide>
+        }
+      ]
+    }
   ]);
 
 

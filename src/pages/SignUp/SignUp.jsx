@@ -15,7 +15,7 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 
 const SignUp = () => {
     const [showPass, setShowPass] = useState(false)
-    const {signUpUser, updateUserProfile}= useAuth()
+    const { signUpUser, updateUserProfile } = useAuth()
     const axiosPublic = useAxiosPublic()
     const navigate = useNavigate()
 
@@ -25,32 +25,42 @@ const SignUp = () => {
     const onSubmit = async (data) => {
         // console.log(data)
         const name = data.name;
-        const imageFile=  {image: data.photoURL[0]};
-        console.log(imageFile);
-        const res = await axiosPublic.post(image_hosting_api,imageFile,{
+        const imageFile = { image: data.photoURL[0] };
+        // console.log(imageFile);
+        const res = await axiosPublic.post(image_hosting_api, imageFile, {
             headers: {
                 'content-type': 'multipart/form-data'
             }
         })
-        if(res.data.success){
+        if (res.data.success) {
             signUpUser(data.email, data.password)
-            .then(()=>{
-                updateUserProfile({displayName: name, photoURL:res.data.data.display_url})
-                .then( (result)=>{
-                    // TODO: save user data in database
-                   
-                    navigate("/")
+                .then(() => {
+                    // update user profile
+                    updateUserProfile({ displayName: name, photoURL: res.data.data.display_url })
+                        .then((result) => {
+                            //  save user data in database
+                            const userInfo = {
+                                name: name,
+                                email: data.email,
+                                role: "Tourist"
+                            }
+                            axiosPublic.post("/users", userInfo)
+                                .then(res => {
+                                    if (res.data.insertedId) {
+                                        navigate("/")
+                                    }
+                                })
+                        })
+                        .catch(err => {
+                            console.log("error from updating profile", err);
+                        })
                 })
-                .catch(err=>{
-                    console.log("error from updating profile", err);
+                .catch(err => {
+                    console.log("error from sign up", err);
                 })
-            })
-            .catch(err=>{
-                console.log("error from sign up", err);
-            })
         }
-       console.log(res.data);
-       
+        console.log(res.data);
+
     };
     return (
         <div className="hero bg-base-200 min-h-screen">
@@ -70,7 +80,7 @@ const SignUp = () => {
                             <label className="label">
                                 <span className="label-text">Name</span>
                             </label>
-                            <input type="text" {...register("name", {required: true})} placeholder="Your name" className="input input-bordered"  />
+                            <input type="text" {...register("name", { required: true })} placeholder="Your name" className="input input-bordered" />
                             <div className='mt-2'>
                                 {errors.name?.type === 'required' && <p role="alert" className='text-red-600'>Type your name in this field !</p>}
                             </div>
@@ -80,7 +90,7 @@ const SignUp = () => {
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input type="email" {...register("email", {required: true})} placeholder="Email" className="input input-bordered" />
+                            <input type="email" {...register("email", { required: true })} placeholder="Email" className="input input-bordered" />
                             <div className='mt-2'>
                                 {errors.email?.type === 'required' && <p role="alert" className='text-red-600'>Type your email in this field !</p>}
                             </div>
@@ -90,7 +100,7 @@ const SignUp = () => {
                             <div className="label">
                                 <span className="label-text">Add profile picture <br /> <BiImageAdd className='text-4xl mt-1 border-l-4 ' /></span>
                             </div>
-                            <input type="file" {...register("photoURL", {required: true})} className=" hidden file-input file-input-bordered w-full max-w-xs" />
+                            <input type="file" {...register("photoURL", { required: true })} className=" hidden file-input file-input-bordered w-full max-w-xs" />
                             <div className=''>
                                 {errors.photoURL?.type === 'required' && <p role="alert" className='text-red-600'>Choose an image from you gallery !</p>}
                             </div>
