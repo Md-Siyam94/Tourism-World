@@ -18,7 +18,7 @@ const PackageCard = ({ tourPackage }) => {
                     {tripTitle}
                         <div className="badge badge-warning"> {tourType}</div>
                     </h2>
-                    <p>Price: $ {price}</p>
+                    <p>Price: {price} $</p>
                     <div className="card-actions justify-end">
 
                         <div className="btn btn-info"><Link to={`/package-details/${_id}`}>View details</Link></div>

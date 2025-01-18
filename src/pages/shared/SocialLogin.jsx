@@ -1,10 +1,13 @@
 import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../custom hooks/useAuth";
+import useAxiosPublic from "../../custom hooks/useAxiosPublic"
 import { useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 
 const SocialLogin = () => {
     const {loginWithGoogle} = useAuth()
+    const axiosPublic = useAxiosPublic()
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -12,7 +15,21 @@ const SocialLogin = () => {
     const handleGoogleLogin =()=>{
         loginWithGoogle()
         .then(result=>{
-            navigate("/")
+            const userInfo={
+                email: result.user?.email,
+                name: result.user?.displayName,
+                role: "Tourist"
+            }
+            axiosPublic.post("/users", userInfo)
+            .then(res=>{
+                // console.log(userInfo);
+                console.log(res.data);
+                navigate("/")
+                Swal.fire({
+                    title: "Successfully login",
+                    icon: "success",
+                  });             
+            })    
         })
         .catch(err=>{
             console.log("error from google login", err);

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import useAuth from "../../../../custom hooks/useAuth";
 
 
@@ -13,6 +14,9 @@ const TouristProfile = () => {
                     <h2 className="text-lg font-semibold mt-2 ">{user?.displayName}</h2>
                     <p className="opacity-70">{user?.email}</p>
                 </div>
+            </div>
+            <div>
+                <button className="btn mt-20 btn-accent"><Link to={"/dashboard/join-tour-guide"}>Apply For Tour Guide </Link></button>
             </div>
         </div>
     );

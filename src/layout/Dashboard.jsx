@@ -1,7 +1,7 @@
 import { FaHome, FaUser } from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
 import Footer from "../pages/shared/Footer";
-import { MdOutlinePostAdd } from "react-icons/md";
+import { MdOutlineAutoStories, MdOutlinePostAdd } from "react-icons/md";
 import { RiUserAddLine } from "react-icons/ri";
 
 
@@ -25,14 +25,18 @@ const Dashboard = () => {
                             </> : <>
                                 {
                                     isGuide ? <>
-
-                                    </> : <>
-                                        <li><Link to={"/dashboard"}><FaUser></FaUser> Manage Profile</Link></li>
-                                        <li><Link>My Assigned Tours</Link></li>
-                                        <li><Link>Manage Stories</Link></li>
+                                        <li><Link to={"/dashboard/guide-profile"}><FaUser></FaUser> Manage Profile</Link></li>
+                                        <li><Link> Tours</Link></li>
+                                        <li><Link to={"/dashboard/manage-stories"}><MdOutlineAutoStories className="text-xl"/> Manage Stories</Link></li>
                                         <li><Link to={"/dashboard/add-stories"}><MdOutlinePostAdd className="text-xl" />Add Stories</Link></li>
                                         <li><Link to={"/dashboard/join-tour-guide"}><RiUserAddLine className="text-xl" /> Join as Tour Guide</Link></li>
-                                    </>
+                                    </> : <>
+                                                        <li><Link to={"/dashboard/tourist-profile"}><FaUser></FaUser> Manage Profile</Link></li>
+                                                        <li><Link>My Assigned Tours</Link></li>
+                                                        <li><Link to={"/dashboard/manage-stories"}><MdOutlineAutoStories className="text-xl"/> Manage Stories</Link></li>
+                                                        <li><Link to={"/dashboard/add-stories"}><MdOutlinePostAdd className="text-xl" />Add Stories</Link></li>
+                                                        <li><Link to={"/dashboard/join-tour-guide"}><RiUserAddLine className="text-xl" /> Join as Tour Guide</Link></li>
+                                                    </>
                                 }
                             </>
 

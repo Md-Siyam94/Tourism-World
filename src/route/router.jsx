@@ -13,6 +13,8 @@ import Dashboard from "../layout/Dashboard";
 import TouristProfile from "../pages/Dashboard/Tourist/Manage Profile/TouristProfile"
 import AddStories from "../pages/Dashboard/Tourist/Add Stories/AddStories";
 import JoinAsGuide from "../pages/Dashboard/Tourist/Join as Guide/JoinAsGuide";
+import GuideProfile from "../pages/Dashboard/Guide/Guide Profile/GuideProfile";
+import ManageStories from "../pages/Dashboard/Shared/ManageStories";
 
 
 
@@ -58,15 +60,28 @@ import JoinAsGuide from "../pages/Dashboard/Tourist/Join as Guide/JoinAsGuide";
       // TODO: SHOW ERROR
       // errorElement: <div></div>,
       children: [
-        // tourist routes
+        // guide routes
+
         {
-          path: "/dashboard",
-          element: <TouristProfile></TouristProfile>
+          path: "/dashboard/guide-profile",
+          element: <GuideProfile></GuideProfile>
         },
+        // tourist and guide
         {
           path: "/dashboard/add-stories",
           element: <AddStories></AddStories>
         },
+        {
+          path: "/dashboard/manage-stories",
+          element: <ManageStories></ManageStories>
+        },
+        // tourist routes
+        {
+          path: "/dashboard/tourist-profile",
+          element: <TouristProfile></TouristProfile>
+        },
+        
+       
         {
           path: "/dashboard/join-tour-guide",
           element: <JoinAsGuide></JoinAsGuide>
