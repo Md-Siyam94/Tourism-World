@@ -15,6 +15,7 @@ import AddStories from "../pages/Dashboard/Tourist/Add Stories/AddStories";
 import JoinAsGuide from "../pages/Dashboard/Tourist/Join as Guide/JoinAsGuide";
 import GuideProfile from "../pages/Dashboard/Guide/Guide Profile/GuideProfile";
 import ManageStories from "../pages/Dashboard/Shared/ManageStories";
+import Community from "../pages/Community/Community"
 
 
 
@@ -29,6 +30,10 @@ import ManageStories from "../pages/Dashboard/Shared/ManageStories";
         {
             path: "/",
             element: <Home></Home>     
+        },
+        {
+          path: "/community",
+          element: <Community></Community>
         },
         {
             path: "/about-us",

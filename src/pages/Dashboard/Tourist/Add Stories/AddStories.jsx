@@ -6,13 +6,17 @@ import useAuth from "../../../../custom hooks/useAuth";
 const AddStories = () => {
     const [images, setImages] = useState([])
     const {user} = useAuth()
+
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const onSubmit = data => {
-        console.log(data)
+        // console.log(data)
+        const date = new Date()
+        console.log(date);
         const story = {
             name: user?.displayName,
             email: user?.email,
             title: data.title,
+            createdAt: date.toISOString(),
             description: data.description,
             // TODO: post the img on imgbb
             image: data.image
@@ -23,7 +27,7 @@ const AddStories = () => {
        const selectedImages = (e.target.files);
        setImages(selectedImages)
     }
-    console.log(images);
+    // console.log(images);
     return (
         <div>
             {/* TODO: Complete the route */}

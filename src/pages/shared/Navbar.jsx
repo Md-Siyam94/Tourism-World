@@ -1,5 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../custom hooks/useAuth";
+import { SiStarship } from "react-icons/si";
 
 
 const Navbar = () => {
@@ -49,7 +50,7 @@ const Navbar = () => {
                             }
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl">TourismWorld</a>
+                    <a className="btn btn-ghost text-xl"><SiStarship className="text-3xl text-sky-500" /> TourismWorld</a>
                 </div>
 
                 <div className="navbar-end">

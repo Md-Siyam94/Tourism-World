@@ -20,29 +20,34 @@ const Dashboard = () => {
                     <ul className="menu">
                         {
                             isAdmin ? <>
-
+                                <li><Link to={"/dashboard/guide-profile"}><FaUser></FaUser> Manage Profile</Link></li>
+                                <li><Link> Tours</Link></li>
+                                <li><Link to={"/dashboard/manage-stories"}><MdOutlineAutoStories className="text-xl" /> Add Package</Link></li>
+                                <li><Link to={"/dashboard/add-stories"}><MdOutlinePostAdd className="text-xl" />Manage Users</Link></li>
+                                <li><Link to={"/dashboard/join-tour-guide"}><RiUserAddLine className="text-xl" /> Manage Candidates
+                                </Link></li>
 
                             </> : <>
                                 {
                                     isGuide ? <>
                                         <li><Link to={"/dashboard/guide-profile"}><FaUser></FaUser> Manage Profile</Link></li>
-                                        <li><Link> Tours</Link></li>
-                                        <li><Link to={"/dashboard/manage-stories"}><MdOutlineAutoStories className="text-xl"/> Manage Stories</Link></li>
+                                        <li><Link>My Assigned Tours</Link></li>
+                                        <li><Link to={"/dashboard/manage-stories"}><MdOutlineAutoStories className="text-xl" /> Manage Stories</Link></li>
+                                        <li><Link to={"/dashboard/add-stories"}><MdOutlinePostAdd className="text-xl" />Add Stories</Link></li>
+                                       
+                                    </> : <>
+                                        <li><Link to={"/dashboard/tourist-profile"}><FaUser></FaUser> Manage Profile</Link></li>
+                                        <li><Link>My Assigned Tours</Link></li>
+                                        <li><Link to={"/dashboard/manage-stories"}><MdOutlineAutoStories className="text-xl" /> Manage Stories</Link></li>
                                         <li><Link to={"/dashboard/add-stories"}><MdOutlinePostAdd className="text-xl" />Add Stories</Link></li>
                                         <li><Link to={"/dashboard/join-tour-guide"}><RiUserAddLine className="text-xl" /> Join as Tour Guide</Link></li>
-                                    </> : <>
-                                                        <li><Link to={"/dashboard/tourist-profile"}><FaUser></FaUser> Manage Profile</Link></li>
-                                                        <li><Link>My Assigned Tours</Link></li>
-                                                        <li><Link to={"/dashboard/manage-stories"}><MdOutlineAutoStories className="text-xl"/> Manage Stories</Link></li>
-                                                        <li><Link to={"/dashboard/add-stories"}><MdOutlinePostAdd className="text-xl" />Add Stories</Link></li>
-                                                        <li><Link to={"/dashboard/join-tour-guide"}><RiUserAddLine className="text-xl" /> Join as Tour Guide</Link></li>
-                                                    </>
+                                    </>
                                 }
                             </>
 
                         }
                         <div className="divider"></div>
-                        <li><Link to={"/"}><FaHome /> Back Home</Link></li>
+                        <li><Link to={"/"}><FaHome className="text-lg"/> Back Home</Link></li>
 
                     </ul>
                 </div>

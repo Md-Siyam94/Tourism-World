@@ -17,7 +17,7 @@ const AllTrips = () => {
     })
     },[])
     return (
-        <div className='max-w-6xl mx-auto '>
+        <div className='max-w-6xl mx-auto pt-20'>
             <h1 className='text-3xl font-semibold text-yellow-600'>All Trips</h1>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 p-10">
                 {

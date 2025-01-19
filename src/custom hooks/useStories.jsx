@@ -8,9 +8,9 @@ const useStories = () => {
     const axiosPublic = useAxiosPublic();
 
     const {data: stories = [], refetch} = useQuery({
-        queryKey: ["stories", user?.email],
+        queryKey: ["stories"],
         queryFn: async()=>{
-            const res = axiosPublic.get(`/stories/${user?.email}`);
+            const res = await axiosPublic.get(`/stories`);
             return res.data;
         },
         
