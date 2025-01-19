@@ -18,7 +18,8 @@ const Login = () => {
 
         loginUser(data.email, data.password)
             .then(result => {
-                navigate(location?.pathname ? location?.pathname : "/")
+                navigate( "/")
+
             })
             .catch(err => {
                 console.log("Error from login page", err)

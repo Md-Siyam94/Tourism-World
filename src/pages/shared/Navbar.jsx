@@ -50,7 +50,7 @@ const Navbar = () => {
                             }
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl"><SiStarship className="text-3xl text-sky-500" /> TourismWorld</a>
+                    <a className="btn btn-ghost text-xl"><SiStarship className="text-3xl text-red-400" /> TourismWorld</a>
                 </div>
 
                 <div className="navbar-end">

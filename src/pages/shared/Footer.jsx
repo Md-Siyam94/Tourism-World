@@ -6,7 +6,7 @@ const Footer = () => {
         <div>
             <footer className="footer bg-neutral text-neutral-content p-10">
                 <aside>
-                <SiStarship className="text-3xl text-sky-500" />
+                <SiStarship className="text-3xl text-red-400" />
                     <p>
                         TourismWorld Ltd.
                         <br />

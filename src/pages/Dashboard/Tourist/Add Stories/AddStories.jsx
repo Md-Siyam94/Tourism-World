@@ -23,11 +23,11 @@ const AddStories = () => {
         }
     };
 
-    const handleMultipleImg =(e)=>{
-       const selectedImages = (e.target.files);
+    const handleFileChange =(e)=>{
+       const selectedImages = (e.target.Files);
        setImages(selectedImages)
     }
-    // console.log(images);
+    console.log(images);
     return (
         <div>
             {/* TODO: Complete the route */}
@@ -59,7 +59,7 @@ const AddStories = () => {
                         <div className="label">
                             <span className="label-text">Add image</span>
                         </div>
-                        <input onChange={handleMultipleImg} multiple  type="file" {...register("image", {required: true})} className="file-input file-input-bordered w-full max-w-xs" />
+                        <input onChange={handleFileChange} multiple  type="file" {...register("image", {required: true})} className="file-input file-input-bordered w-full max-w-xs" />
                         <div>
                             {errors.image?.type === 'required' && <p role="alert" className='text-red-600 mt-2'>Title is required !</p>}
                         </div>

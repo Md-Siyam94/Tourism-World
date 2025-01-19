@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const PackageCard = ({ tourPackage }) => {
     const { photo, tourType, tripTitle, price, _id } = tourPackage || {}
-    console.log(tripTitle);
+    // console.log(tripTitle);
     return (
         <div className="grid">
             <div className="card bg-base-100 shadow-xl ">

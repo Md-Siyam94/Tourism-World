@@ -74,22 +74,22 @@ import Community from "../pages/Community/Community"
         // tourist and guide
         {
           path: "/dashboard/add-stories",
-          element: <AddStories></AddStories>
+          element: <PrivetRoute><AddStories></AddStories></PrivetRoute>
         },
         {
           path: "/dashboard/manage-stories",
-          element: <ManageStories></ManageStories>
+          element: <PrivetRoute><ManageStories></ManageStories></PrivetRoute>
         },
         // tourist routes
         {
           path: "/dashboard/tourist-profile",
-          element: <TouristProfile></TouristProfile>
+          element: <PrivetRoute><TouristProfile></TouristProfile></PrivetRoute>
         },
         
        
         {
           path: "/dashboard/join-tour-guide",
-          element: <JoinAsGuide></JoinAsGuide>
+          element: <PrivetRoute><JoinAsGuide></JoinAsGuide></PrivetRoute>
         }
       ]
     }

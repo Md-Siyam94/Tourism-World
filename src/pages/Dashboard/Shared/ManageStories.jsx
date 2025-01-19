@@ -28,7 +28,7 @@ const ManageStories = () => {
                 {
                     stories.length === 0 ? <div className="text-2xl text-red-600 font-semibold flex justify-center my-44">You didn't post any story</div> :  <div className="grid grid-cols-1 justify-center">
                     {
-                        stories.map(story=> <StoryCard key={story._id} story={story}></StoryCard>)
+                        stories.map(story=> <StoryCard key={story._id} story={story} refetch={refetch}></StoryCard>)
                     }
                 </div>
                 }
