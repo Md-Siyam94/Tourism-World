@@ -16,6 +16,7 @@ import JoinAsGuide from "../pages/Dashboard/Tourist/Join as Guide/JoinAsGuide";
 import GuideProfile from "../pages/Dashboard/Guide/Guide Profile/GuideProfile";
 import ManageStories from "../pages/Dashboard/Shared/ManageStories";
 import Community from "../pages/Community/Community"
+import ManageCandidates from "../pages/Dashboard/Admin/Manage Candidates/ManageCandidates";
 
 
 
@@ -24,7 +25,7 @@ import Community from "../pages/Community/Community"
     {
       path: "/",
       element: <MainLayout></MainLayout>,
-    //   TODO: make customise error 
+    
     //   errorElement: <div></div>
       children: [
         {
@@ -62,9 +63,14 @@ import Community from "../pages/Community/Community"
     {
       path:"/dashboard",
       element: <PrivetRoute> <Dashboard></Dashboard></PrivetRoute>,
-      // TODO: SHOW ERROR
+      
       // errorElement: <div></div>,
       children: [
+        // admin routes
+        {
+          path: "/dashboard/manage-candidates",
+          element: <ManageCandidates></ManageCandidates>
+        },
         // guide routes
 
         {

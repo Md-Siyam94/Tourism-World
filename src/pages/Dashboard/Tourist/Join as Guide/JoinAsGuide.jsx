@@ -14,6 +14,7 @@ const JoinAsGuide = () => {
         const applicationInfo = {
             name: user?.displayName,
             email: user?.email,
+            role: user?.role,
             title: data.title,
             description: data.description,
             cvLink: data.cvLink
@@ -36,7 +37,7 @@ const JoinAsGuide = () => {
     };
     return (
         <div>
-            {/* TODO: Complete the route */}
+            
             <div className="pb-20">
                 <h1 className="text-2xl font-semibold mt-8 mb-2">Join as Tour Guide</h1>
                 <form onSubmit={handleSubmit(onSubmit)}>
