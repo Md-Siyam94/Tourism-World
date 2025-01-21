@@ -17,6 +17,7 @@ import GuideProfile from "../pages/Dashboard/Guide/Guide Profile/GuideProfile";
 import ManageStories from "../pages/Dashboard/Shared/ManageStories";
 import Community from "../pages/Community/Community"
 import ManageCandidates from "../pages/Dashboard/Admin/Manage Candidates/ManageCandidates";
+import ManageUsers from "../pages/Dashboard/Admin/Manage users/ManageUsers";
 
 
 
@@ -67,6 +68,10 @@ import ManageCandidates from "../pages/Dashboard/Admin/Manage Candidates/ManageC
       // errorElement: <div></div>,
       children: [
         // admin routes
+        {
+          path: "/dashboard/all-users",
+          element: <ManageUsers></ManageUsers>
+        },
         {
           path: "/dashboard/manage-candidates",
           element: <ManageCandidates></ManageCandidates>
