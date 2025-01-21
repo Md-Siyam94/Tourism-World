@@ -18,6 +18,8 @@ import ManageStories from "../pages/Dashboard/Shared/ManageStories";
 import Community from "../pages/Community/Community"
 import ManageCandidates from "../pages/Dashboard/Admin/Manage Candidates/ManageCandidates";
 import ManageUsers from "../pages/Dashboard/Admin/Manage users/ManageUsers";
+import UpdateStories from "../pages/Dashboard/Shared/UpdateStories"
+import AddPackage from "../pages/Dashboard/Admin/Add package/AddPackage";
 
 
 
@@ -69,6 +71,10 @@ import ManageUsers from "../pages/Dashboard/Admin/Manage users/ManageUsers";
       children: [
         // admin routes
         {
+          path: "/dashboard/add-package",
+          element: <AddPackage></AddPackage>
+        },
+        {
           path: "/dashboard/all-users",
           element: <ManageUsers></ManageUsers>
         },
@@ -85,7 +91,8 @@ import ManageUsers from "../pages/Dashboard/Admin/Manage users/ManageUsers";
         // tourist and guide
         {
           path: "/dashboard/add-stories",
-          element: <PrivetRoute><AddStories></AddStories></PrivetRoute>
+          element: <PrivetRoute><UpdateStories></UpdateStories></PrivetRoute>
+          // element: <PrivetRoute><AddStories></AddStories></PrivetRoute>
         },
         {
           path: "/dashboard/manage-stories",

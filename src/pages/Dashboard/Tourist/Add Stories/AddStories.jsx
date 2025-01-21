@@ -10,13 +10,14 @@ const AddStories = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const onSubmit = data => {
         // console.log(data)
-        const date = new Date()
+       
         console.log(date);
         const story = {
             name: user?.displayName,
             email: user?.email,
+            posterImage: user?.image,
             title: data.title,
-            createdAt: date.toISOString(),
+            createdAt: new Date().toISOString(),
             description: data.description,
             // TODO: post the img on imgbb
             image: data.image

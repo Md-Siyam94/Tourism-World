@@ -8,7 +8,10 @@ const ManageCandidates = () => {
    const [candidates, refetch] = useCandidates()
     // console.log(candidates);
     
-    // TODO: make accept candidate func
+    // Accept candidate func
+    const handleUpdateRole =(id)=>{
+        axiosSecure.update("/users")
+    }
 
 
     // Reject candidate func
@@ -85,10 +88,10 @@ const ManageCandidates = () => {
                                     <span className="badge badge-ghost badge-sm">{candidate?.description}</span>
                                 </td>
                                 <td>
-                                    <button className="btn btn-ghost btn-xs bg-success text-white hover:bg-success ">Accept</button>
+                                    <button onClick={()=>handleUpdateRole(candidate?._id)} className="btn btn-ghost btn-xs bg-success text-white hover:bg-success ">Accept</button>
                                 </td>
                                 <th>
-                                    <button onClick={() => handleDeleteApplication(candidate._id)} className="btn btn-ghost btn-xs bg-error text-white hover:bg-error">Reject</button>
+                                    <button onClick={() => handleDeleteApplication(candidate?._id)} className="btn btn-ghost btn-xs bg-error text-white hover:bg-error">Reject</button>
                                 </th>
                             </tr>)
                         }
