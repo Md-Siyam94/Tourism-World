@@ -52,7 +52,7 @@ const AddStories = () => {
                         </div>
                         <textarea {...register("description")} className="textarea textarea-bordered h-24 w-[50%]" placeholder="Write description" ></textarea>
                         <div>
-                            {errors.description?.type === 'required' && <p role="alert" className='text-red-600 mt-2'>Title is required !</p>}
+                            {errors.description?.type === 'required' && <p role="alert" className='text-red-600 mt-2'>Description is required !</p>}
                         </div>
                     </label>
                     {/* image */}
@@ -62,7 +62,7 @@ const AddStories = () => {
                         </div>
                         <input onChange={handleFileChange} multiple  type="file" {...register("image", {required: true})} className="file-input file-input-bordered w-full max-w-xs" />
                         <div>
-                            {errors.image?.type === 'required' && <p role="alert" className='text-red-600 mt-2'>Title is required !</p>}
+                            {errors.image?.type === 'required' && <p role="alert" className='text-red-600 mt-2'>Please select a photo to post</p>}
                         </div>
                     </label>
 

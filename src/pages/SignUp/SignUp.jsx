@@ -6,6 +6,7 @@ import useAuth from '../../custom hooks/useAuth';
 import { Link, useNavigate } from 'react-router-dom';
 import SocialLogin from '../shared/SocialLogin';
 import useAxiosPublic from '../../custom hooks/useAxiosPublic';
+import Swal from 'sweetalert2';
 
 
 
@@ -42,12 +43,17 @@ const SignUp = () => {
                             const userInfo = {
                                 name: name,
                                 email: data.email,
+                                userImage: res.data.data.display_url,
                                 role: "Tourist"
                             }
                             axiosPublic.post("/users", userInfo)
                                 .then(res => {
                                     if (res.data.insertedId) {
                                         navigate("/")
+                                        Swal.fire({
+                                            title: "Successfully login",
+                                            icon: "success",
+                                        });
                                     }
                                 })
                         })

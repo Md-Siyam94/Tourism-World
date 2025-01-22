@@ -20,6 +20,7 @@ import ManageCandidates from "../pages/Dashboard/Admin/Manage Candidates/ManageC
 import ManageUsers from "../pages/Dashboard/Admin/Manage users/ManageUsers";
 import UpdateStories from "../pages/Dashboard/Shared/UpdateStories"
 import AddPackage from "../pages/Dashboard/Admin/Add package/AddPackage";
+import AdminProfile from "../pages/Dashboard/Admin/Admin profile/AdminProfile";
 
 
 
@@ -70,6 +71,10 @@ import AddPackage from "../pages/Dashboard/Admin/Add package/AddPackage";
       // errorElement: <div></div>,
       children: [
         // admin routes
+        {
+          path: "/dashboard/admin-profile",
+          element: <AdminProfile></AdminProfile>
+        },
         {
           path: "/dashboard/add-package",
           element: <AddPackage></AddPackage>

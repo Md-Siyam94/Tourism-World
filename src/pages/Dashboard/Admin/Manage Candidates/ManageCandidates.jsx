@@ -1,16 +1,30 @@
-import { useQuery } from "@tanstack/react-query";
+
 import useAxiosSecure from "../../../../custom hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import useCandidates from "../../../../custom hooks/useCandidates";
+import useAxiosPublic from "../../../../custom hooks/useAxiosPublic";
 
 const ManageCandidates = () => {
     const axiosSecure = useAxiosSecure()
-   const [candidates, refetch] = useCandidates()
-    // console.log(candidates);
-    
+    // const axiosPublic = useAxiosPublic()
+    const [candidates, refetch] = useCandidates()
+
     // Accept candidate func
-    const handleUpdateRole =(id)=>{
-        axiosSecure.update("/users")
+    const handleMakeGuide = (candidate) => {
+        axiosSecure.update(`/users/${candidate?._id}`)
+            .then(res => {
+                console.log(res.data);
+                // if (res.data?.updatedCount > 0) {
+                //     refetch()
+                //     Swal.fire({
+                //         position: "top-end",
+                //         icon: "success",
+                //         title: `${candidate?.name} is a Tour Guide now`,
+                //         showConfirmButton: false,
+                //         timer: 1500
+                //     });
+                // }
+            })
     }
 
 
@@ -37,7 +51,7 @@ const ManageCandidates = () => {
                             });
                         }
                     })
-              
+
             }
         });
     }
@@ -88,7 +102,7 @@ const ManageCandidates = () => {
                                     <span className="badge badge-ghost badge-sm">{candidate?.description}</span>
                                 </td>
                                 <td>
-                                    <button onClick={()=>handleUpdateRole(candidate?._id)} className="btn btn-ghost btn-xs bg-success text-white hover:bg-success ">Accept</button>
+                                    <button onClick={() => handleMakeGuide(candidate)} className="btn btn-ghost btn-xs bg-success text-white hover:bg-success ">Accept</button>
                                 </td>
                                 <th>
                                     <button onClick={() => handleDeleteApplication(candidate?._id)} className="btn btn-ghost btn-xs bg-error text-white hover:bg-error">Reject</button>

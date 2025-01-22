@@ -65,7 +65,7 @@ const ManageUsers = () => {
                                         <div className="avatar">
                                             <div className="mask mask-squircle h-12 w-12">
                                                 <img
-                                                    src={"https://img.daisyui.com/images/profile/demo/2@94.webp"}
+                                                    src={user?.userImage}
                                                     alt="Avatar Tailwind CSS Component" />
                                             </div>
                                         </div>
