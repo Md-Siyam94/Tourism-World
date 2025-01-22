@@ -3,6 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 import Footer from "../pages/shared/Footer";
 import { MdOutlineAutoStories, MdOutlinePostAdd } from "react-icons/md";
 import { RiUserAddLine } from "react-icons/ri";
+import { FaBookBookmark } from "react-icons/fa6";
 
 
 const Dashboard = () => {
@@ -12,10 +13,7 @@ const Dashboard = () => {
 
     return (
         <div>
-            <div className="flex ">
-                <div className="flex-1 px-14">
-                    <Outlet></Outlet>
-                </div>
+            <div className="flex flex-row-reverse">
                 <div className="w-64 min-h-screen bg-teal-100 bg-opacity-60">
                     <ul className="menu">
                         {
@@ -34,25 +32,26 @@ const Dashboard = () => {
                                         <li><Link>My Assigned Tours</Link></li>
                                         <li><Link to={"/dashboard/add-stories"}><MdOutlinePostAdd className="text-xl" />Add Stories</Link></li>
                                         <li><Link to={"/dashboard/manage-stories"}><MdOutlineAutoStories className="text-xl" /> Manage Stories</Link></li>
-                                       
+
                                     </> : <>
-                                        <li><Link to={"/dashboard/tourist-profile"}><FaUser></FaUser> Manage Profile</Link></li>
-                                        <li><Link>My Assigned Tours</Link></li>
+                                        <li><Link to={"/dashboard/tourist-profile"}><FaUser/> Manage Profile</Link></li>
+                                        <li><Link to={"/dashboard/my-assigned-tours"}><FaBookBookmark className="text-md"/> My Assigned Tours</Link></li>
                                         <li><Link to={"/dashboard/manage-stories"}><MdOutlineAutoStories className="text-xl" /> Manage Stories</Link></li>
-                                        <li><Link to={"/dashboard/join-tour-guide"}><RiUserAddLine className="text-xl" /> Join as Tour Guide</Link></li>
-                                        <li><Link to={"/dashboard/add-stories"}><MdOutlinePostAdd className="text-xl" />Add Stories</Link></li>
+                                        <li><Link to={"/dashboard/join-tour-guide"}><RiUserAddLine className="text-lg" /> Join as Tour Guide</Link></li>
+                                        <li><Link to={"/dashboard/add-stories"}><MdOutlinePostAdd className="text-lg" />Add Stories</Link></li>
                                     </>
                                 }
                             </>
 
                         }
                         <div className="divider"></div>
-                        <li><Link to={"/"}><FaHome className="text-lg"/> Back Home</Link></li>
+                        <li><Link to={"/"}><FaHome className="text-lg" /> Back Home</Link></li>
 
                     </ul>
                 </div>
-
-
+                <div className="flex-1 px-14">
+                    <Outlet></Outlet>
+                </div>
             </div>
             <footer>
                 <Footer></Footer>

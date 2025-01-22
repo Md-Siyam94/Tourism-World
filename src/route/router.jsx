@@ -21,6 +21,8 @@ import ManageUsers from "../pages/Dashboard/Admin/Manage users/ManageUsers";
 import UpdateStories from "../pages/Dashboard/Shared/UpdateStories"
 import AddPackage from "../pages/Dashboard/Admin/Add package/AddPackage";
 import AdminProfile from "../pages/Dashboard/Admin/Admin profile/AdminProfile";
+import MyAssignedTours from "../pages/Dashboard/Shared/MyAssignedTours";
+import EditStoryDetails from "../pages/Dashboard/Shared/EditStoryDetails";
 
 
 
@@ -95,9 +97,19 @@ import AdminProfile from "../pages/Dashboard/Admin/Admin profile/AdminProfile";
         },
         // tourist and guide
         {
+          path: "/dashboard/edit-story/:id",
+          element: <PrivetRoute><EditStoryDetails></EditStoryDetails></PrivetRoute>,
+          loader: ({params}) => fetch(`${import.meta.env.VITE_baseApi}/stories/${params.id}`)
+        },
+        {
           path: "/dashboard/add-stories",
-          element: <PrivetRoute><UpdateStories></UpdateStories></PrivetRoute>
-          // element: <PrivetRoute><AddStories></AddStories></PrivetRoute>
+          // element: <PrivetRoute><UpdateStories></UpdateStories></PrivetRoute>
+          element: <PrivetRoute><AddStories></AddStories></PrivetRoute>
+        },
+        {
+          path: "/dashboard/my-assigned-tours",
+          
+          element: <PrivetRoute><MyAssignedTours></MyAssignedTours></PrivetRoute>
         },
         {
           path: "/dashboard/manage-stories",

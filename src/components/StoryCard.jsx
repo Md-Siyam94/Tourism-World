@@ -1,20 +1,15 @@
 import { HiDotsVertical } from "react-icons/hi";
-import useAuth from "../custom hooks/useAuth";
 import useAxiosPublic from "../custom hooks/useAxiosPublic";
 import Swal from "sweetalert2";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import moment from "moment";
 
 
 const StoryCard = ({ story, refetch }) => {
-    // TODO: Take user photo and name from db
-    const { user } = useAuth()
     const location = useLocation()
     const axiosPublic = useAxiosPublic()
-    const { title, image, description, _id } = story || {}
-    console.log(location);
-    // TODO: make story edit func
-
-
+    const {name, title, image, description, posterImage, createdAt, _id } = story || {}
+ 
     // story delete func
     const handleDeleteStory = (id) => {
         Swal.fire({
@@ -46,11 +41,11 @@ const StoryCard = ({ story, refetch }) => {
             <div className=" bg-base-100 w-[60%] mx-auto shadow-xl pt-6">
                 <div className="flex justify-between items-start mx-6">
                     <div className="flex gap-3 mb-8 items-center ">
-                        <img className="h-10 w-10 rounded-full object-cover" src={user?.photoURL} alt="" />
+                        <img className="h-10 w-10 rounded-full object-cover" src={posterImage} alt="" />
                         <div className="">
-                            <h2 className="font-semibold">{user?.displayName}</h2>
+                            <h2 className="font-semibold">{name}</h2>
                             {/* TODO: give here the created time */}
-                            <h3 className="opacity-60">posted time</h3>
+                            <h3 className="opacity-60">{moment(createdAt).format("MMM Do YY")}</h3>
                         </div>
                     </div>
                     <button><HiDotsVertical className="text-xl" /></button>
@@ -70,10 +65,10 @@ const StoryCard = ({ story, refetch }) => {
                     <div >
                         <div>
                             {
-                                location.pathname === "/dashboard/manage-stories" && <div className="card-actions justify-end mt-4">
-                                    <button className="badge badge-success text-white">Edit</button>
+                                location.pathname === "/dashboard/manage-stories" ? <div className="card-actions justify-end items-center mt-4">
+                                   <Link to={`/dashboard/edit-story/${_id}`}><button className="badge badge-success text-white">Edit</button></Link>
                                     <button onClick={() => handleDeleteStory(_id)} className="badge badge-error text-white">Delete</button>
-                                </div>
+                                </div> : <div>make share option</div>
                             }
                         </div>
                     </div>

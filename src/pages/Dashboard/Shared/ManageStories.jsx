@@ -2,7 +2,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../custom hooks/useAuth";
 import useAxiosPublic from "../../../custom hooks/useAxiosPublic";
-import useStories from "../../../custom hooks/useStories";
 import StoryCard from "../../../components/StoryCard";
 
 
@@ -20,7 +19,7 @@ const ManageStories = () => {
         
     })
     
-    console.log(stories);
+    // console.log(stories);
     return (
         <div>
             <h1 className="text-2xl m-6">Your added stories</h1>

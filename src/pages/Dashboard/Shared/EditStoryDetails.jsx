@@ -1,0 +1,64 @@
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useLoaderData, useParams } from "react-router-dom";
+
+
+const EditStoryDetails = () => {
+    const storyDetails = useLoaderData()
+    const params = useParams()
+    const [uploading, setUploading] = useState(false)
+    const {title, description, image} = storyDetails || {}
+    // console.log(storyDetails, params);
+
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const onSubmit = data => {
+        console.log(data)
+    };
+    return (
+        <div>
+            <div className="">
+                <h1 className="text-2xl font-semibold mt-8 mb-2">Edit Your Story</h1>
+                {/* title */}
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text">Title</span>
+                        </label>
+                        <input type="text" defaultValue={title} {...register("title")} placeholder="Write title" className="input input-bordered w-[50%]" />
+                        <div>
+                            {errors.title?.type === 'required' && <p role="alert" className='text-red-600 mt-2'>Title is required !</p>}
+                        </div>
+                    </div>
+                    {/* description */}
+                    <label className="form-control my-2">
+                        <div className="label">
+                            <span className="label-text">Description</span>
+                        </div>
+                        <textarea {...register("description")} defaultValue={description} className="textarea textarea-bordered h-24 w-[50%]" placeholder="Write description" ></textarea>
+                        <div>
+                            {errors.description?.type === 'required' && <p role="alert" className='text-red-600 mt-2'>Description is required !</p>}
+                        </div>
+                    </label>
+                    {/* image */}
+                    <label className="form-control w-full max-w-xs">
+                        <div className="label">
+                            <span className="label-text">Add image</span>
+                        </div>
+                        <input  multiple type="file"  {...register("image", { required: true })} className="file-input file-input-bordered w-full max-w-xs" />
+                        <div>
+                            {errors.image?.type === 'required' && <p role="alert" className='text-red-600 mt-2'>Please select a photo to post</p>}
+                        </div>
+                    </label>
+
+                    <div>
+                        <button className="btn btn-info text-white mt-8">{
+                            uploading ? "Posting..." : "Post story"
+                        }</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
+};
+
+export default EditStoryDetails;
