@@ -52,7 +52,7 @@ const StoryCard = ({ story, refetch }) => {
                 </div>
                 <figure>
                     <img
-                        className="h-64 w-full"
+                        className="h-72 w-full object-cover"
                         src={image}
                         alt="Story image" />
                 </figure>

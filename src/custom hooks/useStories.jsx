@@ -4,7 +4,7 @@ import useAxiosPublic from "./useAxiosPublic";
 
 
 const useStories = () => {
-    const {user} = useAuth()
+    
     const axiosPublic = useAxiosPublic();
 
     const {data: stories = [], refetch} = useQuery({

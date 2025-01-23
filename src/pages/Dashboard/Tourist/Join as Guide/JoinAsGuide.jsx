@@ -8,13 +8,21 @@ import Swal from 'sweetalert2';
 const JoinAsGuide = () => {
     const { user } = useAuth()
     const axiosPublic = useAxiosPublic()
+    const {data: loginUser = {} } =  useQuery({
+        queryKey: ["loginUser", user?.email],
+        queryFn: async()=>{
+            const res = await axiosPublic.get(`/users/${user?.email}`)
+            return res.data
+        }
+    })
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const onSubmit = data => {
-        console.log(data)
+        // console.log(data)
         const applicationInfo = {
             name: user?.displayName,
             email: user?.email,
-            role: user?.role,
+            candidateImage: user?.photoURL,
+            role: loginUser?.role,
             title: data.title,
             description: data.description,
             cvLink: data.cvLink
@@ -31,9 +39,6 @@ const JoinAsGuide = () => {
                     });
                 }
             })
-
-
-
     };
     return (
         <div>

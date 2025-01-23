@@ -10,21 +10,39 @@ const ManageCandidates = () => {
     const [candidates, refetch] = useCandidates()
 
     // Accept candidate func
+
     const handleMakeGuide = (candidate) => {
-        axiosSecure.update(`/users/${candidate?._id}`)
-            .then(res => {
-                console.log(res.data);
-                // if (res.data?.updatedCount > 0) {
-                //     refetch()
-                //     Swal.fire({
-                //         position: "top-end",
-                //         icon: "success",
-                //         title: `${candidate?.name} is a Tour Guide now`,
-                //         showConfirmButton: false,
-                //         timer: 1500
-                //     });
-                // }
-            })
+        Swal.fire({
+            title: "Are you sure want to make tuor guide?",
+           
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Make Tour Guide"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const updateData = {
+                    role: "Guide"
+                }
+                axiosSecure.put(`/users/${candidate?._id}`, updateData)
+                .then(res => {
+                    console.log(res.data);
+                    if (res.data?.modifiedCount > 0) {
+                        refetch()
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: `${candidate?.name} is a Tour Guide now`,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
+                })
+
+            }
+        });
+       
     }
 
 
@@ -85,7 +103,7 @@ const ManageCandidates = () => {
                                         <div className="avatar">
                                             <div className="mask mask-squircle h-12 w-12">
                                                 <img
-                                                    src={"https://img.daisyui.com/images/profile/demo/2@94.webp"}
+                                                    src={candidate?.candidateImage}
                                                     alt="Avatar Tailwind CSS Component" />
                                             </div>
                                         </div>

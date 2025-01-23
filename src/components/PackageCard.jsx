@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
-
+import { motion } from "motion/react"
 
 const PackageCard = ({ tourPackage }) => {
     const { photo, tourType, tripTitle, price, _id } = tourPackage || {}
     // console.log(tripTitle);
     return (
-        <div className="grid">
+        <motion.div
+        whileHover={{ scale: 0.9 }}
+        whileTap={{ scale: 0.8 }}
+       
+        className="grid">
             <div className="card bg-base-100 shadow-xl ">
                 <figure>
                     <img
@@ -25,7 +29,7 @@ const PackageCard = ({ tourPackage }) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 };
 
