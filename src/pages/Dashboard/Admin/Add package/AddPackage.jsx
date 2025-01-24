@@ -1,10 +1,48 @@
 import { useForm } from "react-hook-form";
+import useAxiosSecure from "../../../../custom hooks/useAxiosSecure";
+import { useState } from "react";
+import Swal from "sweetalert2";
 
+
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 const AddPackage = () => {
-
+    const axiosSecure = useAxiosSecure()
+    const [uploading, setUploading] = useState(false)
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    const onSubmit = data => {
-        console.log(data);
+    const onSubmit = async (data) => {
+        // console.log(data);
+        setUploading(true)
+        const imageFile = { image: data.image[0] }
+        const res = await axiosSecure.post(image_hosting_api, imageFile, {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        })
+        if (res.data?.success) {
+            const packageInfo = {
+                tripTitle: data.tripTitle,
+                tourType: data.tourType,
+                photo: res.data.data.display_url,
+                price: data.price,
+                destinations: data.destinations.split('\n')
+            }
+            axiosSecure.post("/packages", packageInfo)
+                .then(res => {
+                    if (res.data.insertedId) {
+                        setUploading(false)
+                        reset()
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: "Your work has been saved",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
+                })
+        }
+
     };
     return (
         <div className="mb-20">
@@ -63,7 +101,11 @@ const AddPackage = () => {
                 </label>
 
                 <div>
-                    <button className="btn btn-info text-white mt-8">Post story</button>
+                    <button className="btn btn-info text-white mt-8">
+                        {
+                            uploading ? "Posting..." : "Post story"
+                    }
+                    </button>
                 </div>
             </form>
         </div>
