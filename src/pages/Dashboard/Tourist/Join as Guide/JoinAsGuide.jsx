@@ -23,6 +23,7 @@ const JoinAsGuide = () => {
             email: user?.email,
             candidateImage: user?.photoURL,
             role: loginUser?.role,
+            userId: loginUser?._id,
             title: data.title,
             description: data.description,
             cvLink: data.cvLink

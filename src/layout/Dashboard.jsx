@@ -8,8 +8,8 @@ import { FaBookBookmark } from "react-icons/fa6";
 
 const Dashboard = () => {
 
-    const isAdmin = true
-    const isGuide = false
+    const isAdmin = false
+    const isGuide = true
 
     return (
         <div>
@@ -29,13 +29,13 @@ const Dashboard = () => {
                                 {
                                     isGuide ? <>
                                         <li><Link to={"/dashboard/guide-profile"}><FaUser></FaUser> Manage Profile</Link></li>
-                                        <li><Link>My Assigned Tours</Link></li>
+                                        <li><Link to={"/dashboard/my-assigned-tours"}>My Assigned Tours</Link></li>
                                         <li><Link to={"/dashboard/add-stories"}><MdOutlinePostAdd className="text-xl" />Add Stories</Link></li>
                                         <li><Link to={"/dashboard/manage-stories"}><MdOutlineAutoStories className="text-xl" /> Manage Stories</Link></li>
 
                                     </> : <>
                                         <li><Link to={"/dashboard/tourist-profile"}><FaUser/> Manage Profile</Link></li>
-                                        <li><Link to={"/dashboard/my-assigned-tours"}><FaBookBookmark className="text-md"/> My Assigned Tours</Link></li>
+                                        <li><Link to={"/dashboard/my-bookings"}><FaBookBookmark className="text-md"/> My Bookings</Link></li>
                                         <li><Link to={"/dashboard/add-stories"}><MdOutlinePostAdd className="text-lg" />Add Stories</Link></li>
                                         <li><Link to={"/dashboard/manage-stories"}><MdOutlineAutoStories className="text-xl" /> Manage Stories</Link></li>
                                         <li><Link to={"/dashboard/join-tour-guide"}><RiUserAddLine className="text-lg" /> Join as Tour Guide</Link></li>

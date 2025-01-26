@@ -14,11 +14,9 @@ const ManageStories = () => {
     const { data: stories = [], refetch } = useQuery({
         queryKey: ["stories", user?.email],
         queryFn: async () => {
-            const res = await axiosPublic.get(`/stories/${user?.email}`);
+            const res = await axiosPublic.get(`/stories-by-email/${user?.email}`);
             return res.data;
         },
-
-
     })
 
     // console.log(stories);

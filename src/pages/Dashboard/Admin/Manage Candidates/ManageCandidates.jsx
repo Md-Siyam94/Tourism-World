@@ -13,7 +13,7 @@ const ManageCandidates = () => {
 
     const handleMakeGuide = (candidate) => {
         Swal.fire({
-            title: "Are you sure want to make tuor guide?",
+            title: "Are you sure want to make tour guide?",
            
             icon: "warning",
             showCancelButton: true,
@@ -22,13 +22,11 @@ const ManageCandidates = () => {
             confirmButtonText: "Make Tour Guide"
         }).then((result) => {
             if (result.isConfirmed) {
-                const updateData = {
-                    role: "Guide"
-                }
-                axiosSecure.put(`/users/${candidate?._id}`, updateData)
+               
+                axiosSecure.put(`/users/${candidate?.userId}`, {role: "Guide"})
                 .then(res => {
                     console.log(res.data);
-                    if (res.data?.modifiedCount > 0) {
+                    if (res.data?.updatedResult?.modifiedCount > 0) {
                         refetch()
                         Swal.fire({
                             position: "top-end",
@@ -39,12 +37,9 @@ const ManageCandidates = () => {
                         });
                     }
                 })
-
             }
-        });
-       
+        }); 
     }
-
 
     // Reject candidate func
     const handleDeleteApplication = (id) => {
@@ -92,7 +87,7 @@ const ManageCandidates = () => {
                     </thead>
                     <tbody>
                         {
-                            candidates.map((candidate, index) => <tr key={candidate._id} >
+                            candidates.map((candidate, index) => <tr key={index} >
                                 <th>
                                     <label>
                                         {index + 1}
@@ -110,7 +105,7 @@ const ManageCandidates = () => {
                                         <div>
                                             <div className="font-bold">{candidate?.name}</div>
                                             <div className="text-sm opacity-50">{candidate?.email}</div>
-                                            <div className="text-sm opacity-50">{candidate?.role}</div>
+                                            {/* <div className="text-sm opacity-50">{candidate?.role}</div> */}
                                         </div>
                                     </div>
                                 </td>

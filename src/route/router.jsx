@@ -23,6 +23,7 @@ import AddPackage from "../pages/Dashboard/Admin/Add package/AddPackage";
 import AdminProfile from "../pages/Dashboard/Admin/Admin profile/AdminProfile";
 import MyAssignedTours from "../pages/Dashboard/Shared/MyAssignedTours";
 import EditStoryDetails from "../pages/Dashboard/Shared/EditStoryDetails";
+import MyBookings from "../pages/Dashboard/Tourist/My bookings/MyBookings";
 
 
 
@@ -90,12 +91,18 @@ import EditStoryDetails from "../pages/Dashboard/Shared/EditStoryDetails";
           element: <ManageCandidates></ManageCandidates>
         },
         // guide routes
-
+        {
+          path: "/dashboard/my-assigned-tours",
+          
+          element: <PrivetRoute><MyAssignedTours></MyAssignedTours></PrivetRoute>
+        },
         {
           path: "/dashboard/guide-profile",
           element: <GuideProfile></GuideProfile>
         },
+
         // tourist and guide
+        
         {
           path: "/dashboard/edit-story/:id",
           element: <PrivetRoute><EditStoryDetails></EditStoryDetails></PrivetRoute>,
@@ -103,22 +110,22 @@ import EditStoryDetails from "../pages/Dashboard/Shared/EditStoryDetails";
         },
         {
           path: "/dashboard/add-stories",
-          // element: <PrivetRoute><UpdateStories></UpdateStories></PrivetRoute>
           element: <PrivetRoute><AddStories></AddStories></PrivetRoute>
-        },
-        {
-          path: "/dashboard/my-assigned-tours",
-          
-          element: <PrivetRoute><MyAssignedTours></MyAssignedTours></PrivetRoute>
         },
         {
           path: "/dashboard/manage-stories",
           element: <PrivetRoute><ManageStories></ManageStories></PrivetRoute>
         },
+
         // tourist routes
+
         {
           path: "/dashboard/tourist-profile",
           element: <PrivetRoute><TouristProfile></TouristProfile></PrivetRoute>
+        },
+        {
+          path: "/dashboard/my-bookings",
+          element: <PrivetRoute><MyBookings></MyBookings></PrivetRoute>
         },
         
        

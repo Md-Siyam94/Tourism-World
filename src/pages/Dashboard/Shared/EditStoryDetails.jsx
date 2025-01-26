@@ -9,6 +9,7 @@ const EditStoryDetails = () => {
     const [uploading, setUploading] = useState(false)
     const {title, description, image} = storyDetails || {}
     // console.log(storyDetails, params);
+    // TODO: MAKE THIS PAGE
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {

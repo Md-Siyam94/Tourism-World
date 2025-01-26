@@ -1,28 +1,18 @@
 import { Link } from "react-router-dom";
-
+import useBookings from "../../../../custom hooks/useBookings";
 import Swal from "sweetalert2";
-import useAxiosPublic from "../../../custom hooks/useAxiosPublic";
-import { useQuery } from "@tanstack/react-query";
-import useAuth from "../../../custom hooks/useAuth";
+import useAxiosPublic from "../../../../custom hooks/useAxiosPublic";
 
 
-
-const MyAssignedTours = () => {  
+const MyBookings = () => {
+    const [myBookings, refetch] = useBookings()
     const axiosPublic = useAxiosPublic()
-    const {user} = useAuth()
-
-     const {data: myAssigns = [], refetch} = useQuery({
-        queryKey: ["myAssigns", user?.email],
-        queryFn: async()=>{
-            const res = await axiosPublic.get(`/bookings-by-guide/${user?.email}`)
-            return res.data
-        }
-    })
+    console.log(myBookings);
 
 
 
     // delete tour package
-    const handleRejectTour = (booking) => {
+    const handleDeleteTour = (booking) => {
         // console.log(booking);
         Swal.fire({
             title: "Are you sure?",
@@ -31,16 +21,16 @@ const MyAssignedTours = () => {
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Reject"
+            confirmButtonText: "Delete"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosPublic.put(`/bookings/${booking?._id}`, {status: "rejected"})
+                axiosPublic.delete(`/bookings/${booking?._id}`)
                 .then(res=>{
-                    if(res.data?.modifiedCount > 0){
+                    if(res.data?.deletedCount > 0){
                         refetch()
                         Swal.fire({
-                            title: "Rejected!",
-                            text: `${booking?.packageName} has been rejected.`,
+                            title: "Deleted!",
+                            text: `${booking?.packageName} has been deleted.`,
                             icon: "success"
                         });
                     }
@@ -50,7 +40,7 @@ const MyAssignedTours = () => {
     }
     return (
         <div>
-            <h1 className="text-2xl font-semibold mt-8 mb-4">My Assigned Bookings </h1>
+            <h1 className="text-2xl font-semibold mt-8 mb-4">My Bookings </h1>
             <div>
                 <div className="overflow-x-auto">
                     <table className="table">
@@ -59,28 +49,28 @@ const MyAssignedTours = () => {
                             <tr>
                                 <th>#</th>
                                 <th>Package Name</th>
-                                <th>Booker Name</th>
+                                <th>Guide</th>
                                 <th>Tour Date</th>
                                 <th>Price</th>
                                 <th>Status</th>
-                                <th>Accept Tour</th>
+                                <th>Payment</th>
                                 <th>Cancel Tour</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                myAssigns.map((booking, index) => <tr key={index} className="hover">
+                                myBookings.map((booking, index) => <tr key={index} className="hover">
                                     <th className="opacity-70">{index + 1}</th>
                                     <td className="opacity-70 font-semibold">{booking?.packageName}</td>
-                                    <td className="opacity-70">{booking?.bookerName}</td>
+                                    <td className="opacity-70">{booking?.guideName}</td>
                                     <td className="opacity-70">{booking?.bookingDate}</td>
                                     <td className="opacity-70">{booking?.packagePrice} $</td>
                                     <td className="opacity-70">{booking?.status}</td>
                                     <td>
-                                        <button className="btn text-white btn-success" disabled={booking?.status !== "in-review"}>Accept</button>
+                                        <button className="btn text-white btn-info"><Link>Pay</Link></button>
                                     </td>
                                     <td>
-                                        <button onClick={() => handleRejectTour(booking)} className="btn text-white btn-error" >Reject</button>
+                                        <button onClick={() => handleDeleteTour(booking)} className="btn text-white btn-error" disabled={booking?.status !== "pending" && booking?.status !== "rejected" }>Cancel</button>
                                     </td>
 
                                 </tr>)
@@ -93,4 +83,4 @@ const MyAssignedTours = () => {
     );
 };
 
-export default MyAssignedTours;
+export default MyBookings;

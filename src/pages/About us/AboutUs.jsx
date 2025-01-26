@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 import DevImg from "../../assets/WhatsApp Image 2024-10-29 at 23.24.11_a5b649bc.jpg"
 
-
 const AboutUs = () => {
-    // TODO: customise this section
     return (
         <div className="max-w-7xl mx-auto pb-20  pt-14">
 
@@ -29,8 +27,6 @@ const AboutUs = () => {
                         <button className="underline text-blue-500 hover:text-blue-600"> <Link to={"https://github.com/Md-Siyam94/coffee-store-client"}>Coffee house client</Link></button>
                         <button className="underline text-blue-500 hover:text-blue-600"> <Link to={"https://github.com/Md-Siyam94/Dragon-News-React"}>Dragon News</Link></button>
                         <button className="underline text-blue-500 hover:text-blue-600"> <Link to={"https://github.com/Md-Siyam94/Knowledge-Cafe"}>Knowledge cafe</Link></button>
-
-
                     </div>
                 </div>
             </div>

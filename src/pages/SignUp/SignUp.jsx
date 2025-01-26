@@ -19,12 +19,15 @@ const SignUp = () => {
     const { signUpUser, updateUserProfile } = useAuth()
     const axiosPublic = useAxiosPublic()
     const navigate = useNavigate()
+    const [uploading, setUploading] = useState(false);
+    const [error, setError] = useState('')
 
 
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = async (data) => {
         // console.log(data)
+        setUploading(true)
         const name = data.name;
         const imageFile = { image: data.photoURL[0] };
         // console.log(imageFile);
@@ -34,6 +37,7 @@ const SignUp = () => {
             }
         })
         if (res.data.success) {
+            setUploading(false)
             signUpUser(data.email, data.password)
                 .then(() => {
                     // update user profile
@@ -59,6 +63,7 @@ const SignUp = () => {
                         })
                         .catch(err => {
                             console.log("error from updating profile", err);
+
                         })
                 })
                 .catch(err => {
@@ -116,7 +121,7 @@ const SignUp = () => {
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type={showPass ? "text" : "password"} {...register("password", { required: true })} placeholder="password" className="input input-bordered relative" />
+                            <input type={showPass ? "text" : "password"} {...register("password", { required: true, minLength: 6, })} placeholder="password" className="input input-bordered relative" />
                             <button onClick={() => setShowPass(!showPass)} className='absolute mt-12 pt-1 ml-72'>
                                 {
                                     showPass ? <FaEye /> : <FaEyeSlash />
@@ -125,12 +130,18 @@ const SignUp = () => {
                             <div className='mt-2'>
                                 {errors.password?.type === 'required' && <p role="alert" className='text-red-600'>Give your password to login!</p>}
                             </div>
+                            <div className='mt-2'>
+                                {errors.password?.type === 'minLength' && <p role="alert" className='text-red-600'>Password must be 6 characters!</p>}
+                            </div>
                             <label className="label">
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             </label>
                         </div>
                         <div className="form-control mt-6">
-                            <button className="btn bg-teal-600 hover:bg-teal-700 text-white">Sign up</button>
+                            <button className="btn bg-teal-600 hover:bg-teal-700 text-white">
+                                {
+                                    uploading ? 'Login...' : 'Sign up'
+                            }</button>
                         </div>
                         <div>
                             <p className='text-center mt-2'>Don't have any account ? <Link to={"/login"} className='text-blue-800 font-semibold'>Login</Link></p>
