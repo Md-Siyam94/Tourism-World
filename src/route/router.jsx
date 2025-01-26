@@ -24,6 +24,7 @@ import AdminProfile from "../pages/Dashboard/Admin/Admin profile/AdminProfile";
 import MyAssignedTours from "../pages/Dashboard/Shared/MyAssignedTours";
 import EditStoryDetails from "../pages/Dashboard/Shared/EditStoryDetails";
 import MyBookings from "../pages/Dashboard/Tourist/My bookings/MyBookings";
+import Payment from "../pages/Dashboard/Tourist/Payment/Payment";
 
 
 
@@ -49,7 +50,7 @@ import MyBookings from "../pages/Dashboard/Tourist/My bookings/MyBookings";
         },
         {
             path: "/trips",
-            element: <PrivetRoute><AllTrips></AllTrips></PrivetRoute>     
+            element: <AllTrips></AllTrips>   
         },
         {
             path: "/package-details/:id",
@@ -102,7 +103,7 @@ import MyBookings from "../pages/Dashboard/Tourist/My bookings/MyBookings";
         },
 
         // tourist and guide
-        
+
         {
           path: "/dashboard/edit-story/:id",
           element: <PrivetRoute><EditStoryDetails></EditStoryDetails></PrivetRoute>,
@@ -118,6 +119,11 @@ import MyBookings from "../pages/Dashboard/Tourist/My bookings/MyBookings";
         },
 
         // tourist routes
+        {
+          path: "/dashboard/payment/:id",
+          element: <Payment></Payment>,
+          
+        },
 
         {
           path: "/dashboard/tourist-profile",

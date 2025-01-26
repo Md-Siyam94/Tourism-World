@@ -44,7 +44,7 @@ const StoryCard = ({ story, refetch }) => {
                         <img className="h-10 w-10 rounded-full object-cover" src={posterImage} alt="" />
                         <div className="">
                             <h2 className="font-semibold">{name}</h2>
-                            {/* TODO: give here the created time */}
+                           
                             <h3 className="opacity-60">{moment(createdAt).format("MMM Do YY")}</h3>
                         </div>
                     </div>

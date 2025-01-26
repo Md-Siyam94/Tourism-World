@@ -67,7 +67,7 @@ const MyBookings = () => {
                                     <td className="opacity-70">{booking?.packagePrice} $</td>
                                     <td className="opacity-70">{booking?.status}</td>
                                     <td>
-                                        <button className="btn text-white btn-info"><Link>Pay</Link></button>
+                                        <button className="btn text-white btn-info"><Link to={`/dashboard/payment/${booking?._id}`}>Pay</Link></button>
                                     </td>
                                     <td>
                                         <button onClick={() => handleDeleteTour(booking)} className="btn text-white btn-error" disabled={booking?.status !== "pending" && booking?.status !== "rejected" }>Cancel</button>

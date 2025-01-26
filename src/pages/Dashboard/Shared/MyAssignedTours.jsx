@@ -39,10 +39,12 @@ const MyAssignedTours = () => {
                     if(res.data?.modifiedCount > 0){
                         refetch()
                         Swal.fire({
-                            title: "Rejected!",
-                            text: `${booking?.packageName} has been rejected.`,
-                            icon: "success"
-                        });
+                            position: "top-end",
+                            icon: "success",
+                            title: `${booking?.packageName} has been rejected.`,
+                            showConfirmButton: false,
+                            timer: 1500
+                          });
                     }
                 })   
             }

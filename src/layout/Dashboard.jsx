@@ -9,7 +9,7 @@ import { FaBookBookmark } from "react-icons/fa6";
 const Dashboard = () => {
 
     const isAdmin = false
-    const isGuide = true
+    const isGuide = false
 
     return (
         <div>

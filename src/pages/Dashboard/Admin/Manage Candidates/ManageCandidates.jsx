@@ -23,10 +23,10 @@ const ManageCandidates = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                
-                axiosSecure.put(`/users/${candidate?.userId}`, {role: "Guide"})
+                axiosSecure.put(`/users/${candidate?.userId}`, {role: "Guide", candidateId: `${candidate._id}`})
                 .then(res => {
                     console.log(res.data);
-                    if (res.data?.updatedResult?.modifiedCount > 0) {
+                    if (res.data?.updateResult?.modifiedCount > 0) {
                         refetch()
                         Swal.fire({
                             position: "top-end",
