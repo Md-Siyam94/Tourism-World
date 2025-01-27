@@ -3,13 +3,15 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../../../custom hooks/useAuth";
 import useAxiosPublic from "../../../../custom hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 
 const AddStories = () => {
-    const [images, setImages] = useState([])
+    // const [images, setImages] = useState([])
     const axiosPublic = useAxiosPublic()
+    const navigate = useNavigate()
     const [uploading, setUploading] = useState(false)
     const { user } = useAuth()
 
@@ -38,6 +40,7 @@ const AddStories = () => {
             axiosPublic.post("/stories", storyData)
             .then(res=>{
                 if(res.data.insertedId){
+                    navigate("/dashboard/manage-stories")
                     reset()
                     Swal.fire({
                         position: "top-end",
@@ -55,11 +58,11 @@ const AddStories = () => {
 
     };
 
-    const handleFileChange = (e) => {
-        const files = Array.from(e.target.files);
-        setImages(files)
-    }
-    console.log(images);
+    // const handleFileChange = (e) => {
+    //     const files = Array.from(e.target.files);
+    //     setImages(files)
+    // }
+    // console.log(images);
     return (
         <div>
             <div className="">
@@ -70,7 +73,7 @@ const AddStories = () => {
                         <label className="label">
                             <span className="label-text">Title</span>
                         </label>
-                        <input type="text" {...register("title")} placeholder="Write title" className="input input-bordered w-[50%]" />
+                        <input type="text" {...register("title", { required: true })} placeholder="Write title" className="input input-bordered w-[50%]" />
                         <div>
                             {errors.title?.type === 'required' && <p role="alert" className='text-red-600 mt-2'>Title is required !</p>}
                         </div>
@@ -80,7 +83,7 @@ const AddStories = () => {
                         <div className="label">
                             <span className="label-text">Description</span>
                         </div>
-                        <textarea {...register("description")} className="textarea textarea-bordered h-24 w-[50%]" placeholder="Write description" ></textarea>
+                        <textarea {...register("description", { required: true })} className="textarea textarea-bordered h-24 w-[50%]" placeholder="Write description" ></textarea>
                         <div>
                             {errors.description?.type === 'required' && <p role="alert" className='text-red-600 mt-2'>Description is required !</p>}
                         </div>
@@ -90,7 +93,7 @@ const AddStories = () => {
                         <div className="label">
                             <span className="label-text">Add image</span>
                         </div>
-                        <input onChange={handleFileChange} multiple type="file" {...register("image", { required: true })} className="file-input file-input-bordered w-full max-w-xs" />
+                        <input  multiple type="file" {...register("image", { required: true })} className="file-input file-input-bordered w-full max-w-xs" />
                         <div>
                             {errors.image?.type === 'required' && <p role="alert" className='text-red-600 mt-2'>Please select a photo to post</p>}
                         </div>

@@ -1,19 +1,77 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useLoaderData, useParams } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
+import useAxiosPublic from "../../../custom hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
-
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 const EditStoryDetails = () => {
     const storyDetails = useLoaderData()
-    const params = useParams()
+    const axiosPublic = useAxiosPublic()
+    const navigate = useNavigate()
     const [uploading, setUploading] = useState(false)
-    const {title, description, image} = storyDetails || {}
+    const {title, description, image, _id} = storyDetails || {}
     // console.log(storyDetails, params);
     // TODO: MAKE THIS PAGE
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => {
-        console.log(data)
+    const onSubmit = async(data) => {
+        // console.log(data)
+        setUploading(true)
+        const imageFile = {image: data.image[0]}
+        // console.log(imageFile);
+        if(imageFile.image){
+            const res = await axiosPublic.post(image_hosting_api, imageFile, {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
+            })
+            if(res.data?.success){
+                setUploading(false)
+                const updatedInfo = {
+                    title: data?.title,
+                    description: data?.description,
+                    storyImage: res.data.data.display_url,
+                }
+                console.log(updatedInfo);
+                axiosPublic.patch(`/stories/${_id}`,updatedInfo )
+                .then(res=>{
+                    if(res.data?.modifiedCount > 0){
+                        navigate("/dashboard/manage-stories")
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: "story has been updated",
+                            showConfirmButton: false,
+                            timer: 1500
+                          });
+                    }
+                })
+            }
+        }
+        else{
+        
+            const updatedInfo = {
+                title: data?.title,
+                description: data?.description, 
+                storyImage: image   
+            }
+            axiosPublic.patch(`/stories/${_id}`,updatedInfo )
+            .then(res=>{
+                if(res.data?.modifiedCount > 0){
+                    setUploading(false)
+                    navigate("/dashboard/manage-stories")
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "story has been updated",
+                        showConfirmButton: false,
+                        timer: 1500
+                      });
+                }
+            })
+        }
     };
     return (
         <div>
@@ -45,10 +103,8 @@ const EditStoryDetails = () => {
                         <div className="label">
                             <span className="label-text">Add image</span>
                         </div>
-                        <input  multiple type="file"  {...register("image", { required: true })} className="file-input file-input-bordered w-full max-w-xs" />
-                        <div>
-                            {errors.image?.type === 'required' && <p role="alert" className='text-red-600 mt-2'>Please select a photo to post</p>}
-                        </div>
+                        <input  multiple type="file"  {...register("image")} className="file-input file-input-bordered w-full max-w-xs" />
+                        
                     </label>
 
                     <div>

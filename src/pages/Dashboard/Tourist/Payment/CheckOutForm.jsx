@@ -4,24 +4,44 @@ import useBookings from "../../../../custom hooks/useBookings";
 import useAxiosPublic from "../../../../custom hooks/useAxiosPublic";
 import useAuth from "../../../../custom hooks/useAuth";
 import Swal from "sweetalert2";
+import { useQuery } from "@tanstack/react-query";
+import useAssignes from "../../../../custom hooks/useAssignes";
 
 
-const CheckOutForm = ({booking}) => {
+const CheckOutForm = ({params}) => {
     const stripe = useStripe();
     const elements = useElements()
     const [error, setError ] = useState("")
-    const [myBookings] = useBookings()
     const {user} = useAuth()
     const [clientSecret, setClientSecret] = useState('')
     const axiosPublic = useAxiosPublic()
+    const [price, setPrice] = useState(400)
+    const [myAssigns, refetch] = useAssignes()
+    const assigned = myAssigns.map(myAssign=>   params.id === myAssign?._id)
+    console.log(assigned);
 
-useEffect(()=>{
-    axiosPublic.post("/create-payment-intent", {price:`${ booking?.packagePrice}`})
+//    const res = axiosPublic.get(`/bookings-by-id/${params.id}`)
+//     setPrice(res.data?.packagePrice)
+   
+
+    // const {data: booking= {}} = useQuery({
+    //     queryKey: ["booking"],
+    //     queryFn: async()=>{
+    //         const res = await axiosPublic.get(`/bookings-by-id/${params.id}`)
+    //         return res.data
+    //     }
+    // })
+
+    // const totalPrice = booking?.packagePrice;
+
+useEffect( ()=>{
+    axiosPublic.post("/create-payment-intent", {price: price})
     .then(res=>{
         console.log(res.data?.clientSecret);
         setClientSecret(res.data?.clientSecret)
     })
-},[axiosPublic, booking?.packagePrice])
+},[axiosPublic, price])
+
     const handleSubmit = async(event) => {
         event.preventDefault()
 
@@ -93,7 +113,7 @@ useEffect(()=>{
                     }}
                 />
                 <button className="btn btn-sm btn-info mt-8 text-white" type="submit" disabled={!stripe || !clientSecret}>
-                    Pay {booking?.packagePrice} $
+                    Pay 
                 </button>
                 <p className="mt-2 text-red-600">{error}</p>
             </form>

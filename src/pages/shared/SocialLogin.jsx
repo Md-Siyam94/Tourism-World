@@ -6,8 +6,9 @@ import Swal from "sweetalert2";
 
 
 const SocialLogin = () => {
-    const {loginWithGoogle} = useAuth()
+    const {loginWithGoogle, } = useAuth()
     const axiosPublic = useAxiosPublic()
+    
     const location = useLocation();
     const navigate = useNavigate();
 

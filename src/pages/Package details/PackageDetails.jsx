@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../custom hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import { useQuery } from "@tanstack/react-query";
+import GuideProfile from "../../components/GuideProfile";
 
 const PackageDetails = () => {
     const tourPackages = useLoaderData()
@@ -48,7 +49,7 @@ const PackageDetails = () => {
                             Swal.fire({
                                 position: "top-end",
                                 icon: "success",
-                                title: "Your work has been saved",
+                                title: "Booking has been successfull",
                                 showConfirmButton: false,
                                 timer: 1500
                             });
@@ -95,11 +96,12 @@ const PackageDetails = () => {
                     </div>
                     <div className="my-4">
                         <h2 className="text-xl font-semibold">Guide List :</h2>
-                        <div>
+                        {/* <div>
                             {
                                 guides.map((guide, index) => <button className="py-2 px-5 border my-2 ml-10" key={index}><Link to={``}>{guide?.name}</Link></button>)
                             }
-                        </div>
+                        </div> */}
+                        <GuideProfile></GuideProfile>
                     </div>
                     <div className="my-4">
                         <h2 className="text-2xl font-semibold underline text-info">Booking Now </h2>
@@ -157,7 +159,9 @@ const PackageDetails = () => {
                                 </label>
                                 <div className="card-actions justify-end">
 
-                                    <button className="btn btn-info">Book Now</button>
+                                    {
+                                        user ? <button className="btn btn-info">Book Now</button> :  <button className="btn btn-info"><Link to={"/login"}>Book Now</Link></button>
+                                    }
                                 </div>
                             </div>
 

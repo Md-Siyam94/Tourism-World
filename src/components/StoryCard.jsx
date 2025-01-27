@@ -3,13 +3,14 @@ import useAxiosPublic from "../custom hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import { Link, useLocation } from "react-router-dom";
 import moment from "moment";
+import { FacebookIcon, FacebookShareButton } from "react-share";
 
 
 const StoryCard = ({ story, refetch }) => {
     const location = useLocation()
     const axiosPublic = useAxiosPublic()
-    const {name, title, image, description, posterImage, createdAt, _id } = story || {}
- 
+    const { name, title, image, description, posterImage, createdAt, _id } = story || {}
+
     // story delete func
     const handleDeleteStory = (id) => {
         Swal.fire({
@@ -36,6 +37,7 @@ const StoryCard = ({ story, refetch }) => {
             }
         });
     }
+    const shareUrl = 'https://www.pakkamarwadi.tk/';
     return (
         <div>
             <div className=" bg-base-100 w-[60%] mx-auto shadow-xl pt-6">
@@ -44,7 +46,7 @@ const StoryCard = ({ story, refetch }) => {
                         <img className="h-10 w-10 rounded-full object-cover" src={posterImage} alt="" />
                         <div className="">
                             <h2 className="font-semibold">{name}</h2>
-                           
+
                             <h3 className="opacity-60">{moment(createdAt).format("MMM Do YY")}</h3>
                         </div>
                     </div>
@@ -66,9 +68,14 @@ const StoryCard = ({ story, refetch }) => {
                         <div>
                             {
                                 location.pathname === "/dashboard/manage-stories" ? <div className="card-actions justify-end items-center mt-4">
-                                   <Link to={`/dashboard/edit-story/${_id}`}><button className="badge badge-success text-white">Edit</button></Link>
+                                    <Link to={`/dashboard/edit-story/${_id}`}><button className="badge badge-success text-white">Edit</button></Link>
                                     <button onClick={() => handleDeleteStory(_id)} className="badge badge-error text-white">Delete</button>
-                                </div> : <div>make share option</div>
+                                </div> : <div className="card-actions justify-end items-center mt-4">
+                                    <h3 className="opacity-70 font-semibold">Share with</h3>
+                                    <FacebookShareButton url={shareUrl}>
+                                       <FacebookIcon size={30}></FacebookIcon>
+                                    </FacebookShareButton>
+                                </div>
                             }
                         </div>
                     </div>

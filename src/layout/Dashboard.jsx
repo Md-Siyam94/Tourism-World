@@ -4,12 +4,14 @@ import Footer from "../pages/shared/Footer";
 import { MdOutlineAutoStories, MdOutlinePostAdd } from "react-icons/md";
 import { RiUserAddLine } from "react-icons/ri";
 import { FaBookBookmark } from "react-icons/fa6";
+import useAdmin from "../custom hooks/useAdmin";
+import useIsGuide from "../custom hooks/useIsGuide";
 
 
 const Dashboard = () => {
 
-    const isAdmin = false
-    const isGuide = false
+    const [isAdmin] = useAdmin()
+    const [isGuide] = useIsGuide()
 
     return (
         <div>
@@ -29,7 +31,7 @@ const Dashboard = () => {
                                 {
                                     isGuide ? <>
                                         <li><Link to={"/dashboard/guide-profile"}><FaUser></FaUser> Manage Profile</Link></li>
-                                        <li><Link to={"/dashboard/my-assigned-tours"}>My Assigned Tours</Link></li>
+                                        <li><Link to={"/dashboard/my-assigned-tours"}><FaBookBookmark className="text-md"></FaBookBookmark> My Assigned Tours</Link></li>
                                         <li><Link to={"/dashboard/add-stories"}><MdOutlinePostAdd className="text-xl" />Add Stories</Link></li>
                                         <li><Link to={"/dashboard/manage-stories"}><MdOutlineAutoStories className="text-xl" /> Manage Stories</Link></li>
 

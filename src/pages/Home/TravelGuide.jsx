@@ -1,6 +1,7 @@
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import Packages from '../../components/Packages';
+import GuideProfile from '../../components/GuideProfile';
 
 const TravelGuide = () => {
     return (
@@ -20,7 +21,7 @@ const TravelGuide = () => {
                     <Packages></Packages>
                 </TabPanel>
                 <TabPanel>
-                    <h2>Any content 2</h2>
+                    <GuideProfile></GuideProfile>
                 </TabPanel>
             </Tabs>
             </div>

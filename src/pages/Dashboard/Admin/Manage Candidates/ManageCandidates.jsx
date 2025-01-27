@@ -23,7 +23,7 @@ const ManageCandidates = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                
-                axiosSecure.put(`/users/${candidate?.userId}`, {role: "Guide", candidateId: `${candidate._id}`})
+                axiosSecure.put(`/users/${candidate?.userId}`, {role: "Guide", candidateId: candidate._id})
                 .then(res => {
                     console.log(res.data);
                     if (res.data?.updateResult?.modifiedCount > 0) {

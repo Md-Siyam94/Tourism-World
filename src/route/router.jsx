@@ -18,13 +18,14 @@ import ManageStories from "../pages/Dashboard/Shared/ManageStories";
 import Community from "../pages/Community/Community"
 import ManageCandidates from "../pages/Dashboard/Admin/Manage Candidates/ManageCandidates";
 import ManageUsers from "../pages/Dashboard/Admin/Manage users/ManageUsers";
-import UpdateStories from "../pages/Dashboard/Shared/UpdateStories"
 import AddPackage from "../pages/Dashboard/Admin/Add package/AddPackage";
 import AdminProfile from "../pages/Dashboard/Admin/Admin profile/AdminProfile";
 import MyAssignedTours from "../pages/Dashboard/Shared/MyAssignedTours";
 import EditStoryDetails from "../pages/Dashboard/Shared/EditStoryDetails";
 import MyBookings from "../pages/Dashboard/Tourist/My bookings/MyBookings";
 import Payment from "../pages/Dashboard/Tourist/Payment/Payment";
+import Error from "../pages/Error/Error";
+import Profile from "../components/Profile";
 
 
 
@@ -33,8 +34,8 @@ import Payment from "../pages/Dashboard/Tourist/Payment/Payment";
     {
       path: "/",
       element: <MainLayout></MainLayout>,
-    
-    //   errorElement: <div></div>
+      // TODO: enable error component
+      // errorElement: <Error></Error>,
       children: [
         {
             path: "/",
@@ -58,6 +59,11 @@ import Payment from "../pages/Dashboard/Tourist/Payment/Payment";
             loader: ({params})=> fetch(`${import.meta.env.VITE_baseApi}/packages/${params.id}`)     
         },
         {
+          path: "/guideProfile/:id",
+          element :<Profile></Profile>,
+          loader: ({params})=> fetch(`${import.meta.env.VITE_baseApi}/users-by-id/${params.id}`)
+        },
+        {
             path: "/login",
             element: <Login></Login>
         },
@@ -71,8 +77,7 @@ import Payment from "../pages/Dashboard/Tourist/Payment/Payment";
     {
       path:"/dashboard",
       element: <PrivetRoute> <Dashboard></Dashboard></PrivetRoute>,
-      
-      // errorElement: <div></div>,
+      // errorElement: <Error></Error>,
       children: [
         // admin routes
         {

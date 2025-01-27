@@ -4,20 +4,15 @@ import Swal from "sweetalert2";
 import useAxiosPublic from "../../../custom hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../custom hooks/useAuth";
+import useAssignes from "../../../custom hooks/useAssignes";
 
 
 
 const MyAssignedTours = () => {  
     const axiosPublic = useAxiosPublic()
     const {user} = useAuth()
-
-     const {data: myAssigns = [], refetch} = useQuery({
-        queryKey: ["myAssigns", user?.email],
-        queryFn: async()=>{
-            const res = await axiosPublic.get(`/bookings-by-guide/${user?.email}`)
-            return res.data
-        }
-    })
+    const [myAssigns, refetch] = useAssignes()
+    
 
 
 
