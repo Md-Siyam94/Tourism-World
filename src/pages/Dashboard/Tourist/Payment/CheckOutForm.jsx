@@ -26,6 +26,7 @@ const CheckOutForm = ({params}) => {
     })
 
     const totalPrice = booking?.packagePrice;
+    console.log(totalPrice);
 
 useEffect( ()=>{
     if(totalPrice > 0){
