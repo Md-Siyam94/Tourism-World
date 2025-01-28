@@ -20,7 +20,7 @@ const Dashboard = () => {
                     <ul className="menu">
                         {
                             isAdmin ? <>
-                                <li><Link to={"/dashboard/admin-profile"}><FaUser></FaUser> Manage Profile</Link></li>
+                                <li><Link to={"/dashboard"}><FaUser></FaUser> Manage Profile</Link></li>
                                 <li><Link to={"/dashboard/add-package"}><MdOutlineAutoStories className="text-xl" /> Add Package</Link></li>
                                 <li><Link to={"/dashboard/add-stories"}><MdOutlinePostAdd className="text-xl" />Add Stories</Link></li>
                                 <li><Link to={"/dashboard/manage-stories"}><MdOutlineAutoStories className="text-xl" /> Manage Stories</Link></li>
@@ -30,13 +30,13 @@ const Dashboard = () => {
                             </> : <>
                                 {
                                     isGuide ? <>
-                                        <li><Link to={"/dashboard/guide-profile"}><FaUser></FaUser> Manage Profile</Link></li>
+                                        <li><Link to={"/dashboard"}><FaUser></FaUser> Manage Profile</Link></li>
                                         <li><Link to={"/dashboard/my-assigned-tours"}><FaBookBookmark className="text-md"></FaBookBookmark> My Assigned Tours</Link></li>
                                         <li><Link to={"/dashboard/add-stories"}><MdOutlinePostAdd className="text-xl" />Add Stories</Link></li>
                                         <li><Link to={"/dashboard/manage-stories"}><MdOutlineAutoStories className="text-xl" /> Manage Stories</Link></li>
 
                                     </> : <>
-                                        <li><Link to={"/dashboard/tourist-profile"}><FaUser/> Manage Profile</Link></li>
+                                        <li><Link to={"/dashboard"}><FaUser/> Manage Profile</Link></li>
                                         <li><Link to={"/dashboard/my-bookings"}><FaBookBookmark className="text-md"/> My Bookings</Link></li>
                                         <li><Link to={"/dashboard/add-stories"}><MdOutlinePostAdd className="text-lg" />Add Stories</Link></li>
                                         <li><Link to={"/dashboard/manage-stories"}><MdOutlineAutoStories className="text-xl" /> Manage Stories</Link></li>

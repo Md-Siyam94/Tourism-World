@@ -10,10 +10,8 @@ import PackageDetails from "../pages/Package details/PackageDetails";
 import AllTrips from "../pages/All Trips/AllTrips";
 import PrivetRoute from "../provider/PrivetRoute";
 import Dashboard from "../layout/Dashboard";
-import TouristProfile from "../pages/Dashboard/Tourist/Manage Profile/TouristProfile"
 import AddStories from "../pages/Dashboard/Tourist/Add Stories/AddStories";
 import JoinAsGuide from "../pages/Dashboard/Tourist/Join as Guide/JoinAsGuide";
-import GuideProfile from "../pages/Dashboard/Guide/Guide Profile/GuideProfile";
 import ManageStories from "../pages/Dashboard/Shared/ManageStories";
 import Community from "../pages/Community/Community"
 import ManageCandidates from "../pages/Dashboard/Admin/Manage Candidates/ManageCandidates";
@@ -81,8 +79,8 @@ import Profile from "../components/Profile";
       children: [
         // admin routes
         {
-          path: "/dashboard/admin-profile",
-          element: <AdminProfile></AdminProfile>
+          path: "/dashboard",
+          element: <PrivetRoute><AdminProfile></AdminProfile></PrivetRoute>
         },
         {
           path: "/dashboard/add-package",
@@ -102,10 +100,10 @@ import Profile from "../components/Profile";
           
           element: <PrivetRoute><MyAssignedTours></MyAssignedTours></PrivetRoute>
         },
-        {
-          path: "/dashboard/guide-profile",
-          element: <GuideProfile></GuideProfile>
-        },
+        // {
+        //   path: "/dashboard/guide-profile",
+        //   element: <GuideProfile></GuideProfile>
+        // },
 
         // tourist and guide
 
@@ -130,10 +128,10 @@ import Profile from "../components/Profile";
           
         },
 
-        {
-          path: "/dashboard/tourist-profile",
-          element: <PrivetRoute><TouristProfile></TouristProfile></PrivetRoute>
-        },
+        // {
+        //   path: "/dashboard/tourist-profile",
+        //   element: <PrivetRoute><TouristProfile></TouristProfile></PrivetRoute>
+        // },
         {
           path: "/dashboard/my-bookings",
           element: <PrivetRoute><MyBookings></MyBookings></PrivetRoute>
