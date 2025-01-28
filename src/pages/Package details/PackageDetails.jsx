@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 import useGuide from "../../custom hooks/useGuide";
@@ -16,6 +16,7 @@ const PackageDetails = () => {
     const { user } = useAuth()
     const axiosPublic = useAxiosPublic()
     const [error, setError] = useState("")
+    const navigate = useNavigate()
     // const [guideName, setGuideName] = useState("")
     const { photo, tripTitle, price, tourType, destinations, _id } = tourPackages || {}
 
@@ -23,6 +24,9 @@ const PackageDetails = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const onSubmit = async (data) => {
         // console.log(data);
+        if(!user){
+            return navigate("/login")
+        }
         if (data.guideEmail === "Select Guide") {
             return setError("Please select a tour guide !")
         }
@@ -159,9 +163,7 @@ const PackageDetails = () => {
                                 </label>
                                 <div className="card-actions justify-end">
 
-                                    {
-                                        user ? <button className="btn btn-info">Book Now</button> :  <button className="btn btn-info"><Link to={"/login"}>Book Now</Link></button>
-                                    }
+                                    <button className="btn btn-info">Book Now</button> 
                                 </div>
                             </div>
 

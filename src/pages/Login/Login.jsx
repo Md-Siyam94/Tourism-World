@@ -5,37 +5,52 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaEye, } from 'react-icons/fa';
 import { FaEyeSlash } from 'react-icons/fa6';
 import SocialLogin from '../shared/SocialLogin';
+import LoginAnimation from '../../../public/login.json'
+import Lottie from 'lottie-react';
 
 const Login = () => {
-    const { loginUser } = useAuth()
+    const { loginUser, forgotPassword } = useAuth()
     const navigate = useNavigate()
     const location = useLocation()
     const [showPass, setShowPass] = useState(false)
+    const [error,setError] = useState("")
+   
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = (data) => {
         console.log(data);
 
+
+
         loginUser(data.email, data.password)
             .then(result => {
-                navigate( "/")
+                setError("")
+                navigate("/")
 
             })
             .catch(err => {
-                console.log("Error from login page", err)
+                console.log("Error from login page", err.code)
+                setError(err.code)
             })
 
 
     }
     return (
-        <div className="hero bg-base-200 min-h-screen">
+        <div className="hero bg-base-200 min-h-screen pt-16">
             <div className="hero-content flex-col lg:flex-row">
-                <div className="text-center lg:text-left">
+                <div className=" text-center lg:text-left">
 
-                    <p className="py-6">
-                        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                        quasi. In deleniti eaque aut repudiandae et a id nisi.
-                    </p>
+                 
+                    <Lottie
+                animationData={LoginAnimation}
+                loop={true}
+                autoPlay={true}
+                style={{width: "70%", height: "600px", margin: "auto"}}
+
+                >
+
+                </Lottie>
+                    
                 </div>
                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
                     <h1 className="text-3xl font-bold text-center mt-2">Login now!</h1>
@@ -45,7 +60,7 @@ const Login = () => {
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input type="email" {...register("email", { required: true })} placeholder="email" className="input input-bordered" />
+                            <input onChange={(e)=>setEmail(e.target.value)} type="email" {...register("email", { required: true })} placeholder="email" className="input input-bordered" />
                             <div className='mt-2'>
                                 {errors.email?.type === 'required' && <p role="alert" className='text-red-600'>Please fill the email field!</p>}
                             </div>
@@ -65,8 +80,11 @@ const Login = () => {
                                 {errors.password?.type === 'required' && <p role="alert" className='text-red-600'>Give your password to login!</p>}
                             </div>
                             <label className="label">
-                                <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                                <button  className="label-text-alt link link-hover">Forgot password?</button>
                             </label>
+                        </div>
+                        <div>
+                            <p className='text-sm text-red-600 '>{error}</p>
                         </div>
                         <div className="form-control mt-6">
                             <button className="btn bg-teal-600 hover:bg-teal-700 text-white">Login</button>

@@ -13,7 +13,24 @@ const MyAssignedTours = () => {
     const {user} = useAuth()
     const [myAssigns, refetch] = useAssignes()
     
+// accept tour package
+const handleAcceptTour=(booking)=>{
+    console.log(booking);
+    axiosPublic.put(`/bookings/${booking?._id}`, {status: "accepted"})
+    .then(res=>{
+        if(res.data?.modifiedCount > 0){
+            refetch()
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: `${booking?.packageName} has been accepted.`,
+                showConfirmButton: false,
+                timer: 1500
+              });
+        }
+    })  
 
+}
 
 
     // delete tour package
@@ -74,10 +91,10 @@ const MyAssignedTours = () => {
                                     <td className="opacity-70">{booking?.packagePrice} $</td>
                                     <td className="opacity-70">{booking?.status}</td>
                                     <td>
-                                        <button className="btn text-white btn-success" disabled={booking?.status !== "in-review"}>Accept</button>
+                                        <button onClick={()=> handleAcceptTour(booking)} className="btn text-white btn-success" disabled={booking?.status !== "in-review"}>Accept</button>
                                     </td>
                                     <td>
-                                        <button onClick={() => handleRejectTour(booking)} className="btn text-white btn-error" >Reject</button>
+                                        <button onClick={() => handleRejectTour(booking)} className="btn text-white btn-error" disabled={booking?.status === "accepted"}>Reject</button>
                                     </td>
 
                                 </tr>)

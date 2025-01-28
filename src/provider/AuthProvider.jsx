@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../firebase_init";
 import useAxiosPublic from "../custom hooks/useAxiosPublic";
@@ -23,11 +23,13 @@ const AuthProvider = ({ children }) => {
         return signInWithPopup(auth, googleProvider)
     }
 
-    const updateUserProfile =(updatedInfo)=>{
+    const updateUserProfile = (updatedInfo) => {
         setLoading(true)
         // console.log(updatedInfo);
         return updateProfile(auth.currentUser, updatedInfo)
     }
+
+
 
     const loginUser = (email, password) => {
         setLoading(true)
@@ -44,23 +46,23 @@ const AuthProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             console.log("From observer", currentUser);
             setUser(currentUser)
-            if(currentUser){
-                const userInfo ={email: currentUser.email}
-    
+            if (currentUser) {
+                const userInfo = { email: currentUser.email }
+
                 axiosPublic.post('/jwt', userInfo)
-                .then(res=>{
-                    if(res.data.token){
-                        localStorage.setItem("access-token", res.data.token)
-                        setLoading(false)
-                    } 
-                })
+                    .then(res => {
+                        if (res.data.token) {
+                            localStorage.setItem("access-token", res.data.token)
+                            setLoading(false)
+                        }
+                    })
             }
-            else{
+            else {
                 // If user logout
                 localStorage.removeItem("access-token")
                 setLoading(false)
             }
-           
+
 
         })
         return () => {

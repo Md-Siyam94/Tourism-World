@@ -1,11 +1,11 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
-import useBookings from "../../../../custom hooks/useBookings";
 import useAxiosPublic from "../../../../custom hooks/useAxiosPublic";
 import useAuth from "../../../../custom hooks/useAuth";
 import Swal from "sweetalert2";
 import { useQuery } from "@tanstack/react-query";
-import useAssignes from "../../../../custom hooks/useAssignes";
+import { useNavigate } from "react-router-dom";
+
 
 
 const CheckOutForm = ({params}) => {
@@ -15,32 +15,28 @@ const CheckOutForm = ({params}) => {
     const {user} = useAuth()
     const [clientSecret, setClientSecret] = useState('')
     const axiosPublic = useAxiosPublic()
-    const [price, setPrice] = useState(400)
-    const [myAssigns, refetch] = useAssignes()
-    const assigned = myAssigns.map(myAssign=>   params.id === myAssign?._id)
-    console.log(assigned);
+    const navigate = useNavigate()
 
-//    const res = axiosPublic.get(`/bookings-by-id/${params.id}`)
-//     setPrice(res.data?.packagePrice)
-   
+    const {data: booking= {}} = useQuery({
+        queryKey: ["booking"],
+        queryFn: async()=>{
+            const res = await axiosPublic.get(`/bookings-by-id/${params.id}`)
+            return res.data
+        }
+    })
 
-    // const {data: booking= {}} = useQuery({
-    //     queryKey: ["booking"],
-    //     queryFn: async()=>{
-    //         const res = await axiosPublic.get(`/bookings-by-id/${params.id}`)
-    //         return res.data
-    //     }
-    // })
-
-    // const totalPrice = booking?.packagePrice;
+    const totalPrice = booking?.packagePrice;
 
 useEffect( ()=>{
-    axiosPublic.post("/create-payment-intent", {price: price})
-    .then(res=>{
-        console.log(res.data?.clientSecret);
-        setClientSecret(res.data?.clientSecret)
-    })
-},[axiosPublic, price])
+    if(totalPrice > 0){
+        axiosPublic.post("/create-payment-intent", {price: totalPrice})
+        .then(res=>{
+            console.log(res.data?.clientSecret);
+            setClientSecret(res.data?.clientSecret)
+        })
+    }
+   
+},[])
 
     const handleSubmit = async(event) => {
         event.preventDefault()
@@ -81,15 +77,36 @@ useEffect( ()=>{
         }
         else{
             console.log("successful payment", paymentIntent);
-            if(paymentIntent?.status === " success"){
-                // TODO: SAVE PAYMENT INFO AND SET STATUS IN-REVIEW
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Your work has been saved",
-                    showConfirmButton: false,
-                    timer: 1500
-                  });
+            if(paymentIntent?.status === "succeeded"){
+                const payment = {
+                    userName: user?.displayName,
+                    userEmail: user?.email,
+                   transacitonId: paymentIntent.id,
+                    paymentDate: new Date(),
+                    packagePrice: booking?.packagePrice,
+                    packageId: booking?.packageId,
+                    status: "success",
+                }
+                axiosPublic.post("/payments", payment)
+                .then(res=>{
+                    if(res.data?.insertedId){
+                        axiosPublic.put(`/bookings/${booking?._id}`, {status: "in-review"})
+                        .then(res=>{
+                            if(res.data?.modifiedCount > 0){
+                                navigate("/dashboard/my-bookings")
+                                Swal.fire({
+                                    position: "top-end",
+                                    icon: "success",
+                                    title: "Payment Successfull",
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                  });
+                            }
+                        })
+                    }
+                })
+                
+               
             }
         }
     }

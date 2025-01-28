@@ -7,6 +7,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import SocialLogin from '../shared/SocialLogin';
 import useAxiosPublic from '../../custom hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
+import SignupAnimation from '../../../public/sign up.json'
+import Lottie from 'lottie-react';
 
 
 
@@ -74,14 +76,19 @@ const SignUp = () => {
 
     };
     return (
-        <div className="hero bg-base-200 min-h-screen">
+        <div className="hero bg-base-200 min-h-screen pt-16">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="text-center lg:text-left">
 
-                    <p className="py-6">
-                        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                        quasi. In deleniti eaque aut repudiandae et a id nisi.
-                    </p>
+                <Lottie
+                animationData={SignupAnimation}
+                loop={true}
+                autoPlay={true}
+                style={{width: "70%", height: "800px", margin: "auto"}}
+
+                >
+
+                </Lottie>
                 </div>
                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
                     <h1 className="text-3xl text-center mt-3 font-bold">Sign up now!</h1>
@@ -133,9 +140,7 @@ const SignUp = () => {
                             <div className='mt-2'>
                                 {errors.password?.type === 'minLength' && <p role="alert" className='text-red-600'>Password must be 6 characters!</p>}
                             </div>
-                            <label className="label">
-                                <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
-                            </label>
+                           
                         </div>
                         <div className="form-control mt-6">
                             <button className="btn bg-teal-600 hover:bg-teal-700 text-white">

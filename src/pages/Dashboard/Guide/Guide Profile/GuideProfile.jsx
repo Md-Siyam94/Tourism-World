@@ -1,6 +1,7 @@
 import { FaEdit } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../../custom hooks/useAxiosPublic";
+import useAuth from "../../../../custom hooks/useAuth";
 
 const GuideProfile = () => {
     const { user } = useAuth()

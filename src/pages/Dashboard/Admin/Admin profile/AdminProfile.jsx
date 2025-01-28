@@ -1,17 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../../custom hooks/useAuth"
 import useAxiosSecure from "../../../../custom hooks/useAxiosSecure";
-import { FaBook, FaEdit, FaHistory } from "react-icons/fa";
+import {  FaEdit, FaUsers, FaUsersCog } from "react-icons/fa";
 import { MdAddBusiness, MdOutlineAutoStories } from "react-icons/md";
+import useGetUsers from "../../../../custom hooks/useGetUsers";
 
 const AdminProfile = () => {
     const { user } = useAuth()
+    const [users] = useGetUsers()
 
     const axiosSecure = useAxiosSecure()
-    const { data: users = [] } = useQuery({
-        queryKey: ["users", user?.email],
+    const { data: state = [] } = useQuery({
+        queryKey: ["state"],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/users/${user?.email}`)
+            const res = await axiosSecure.get(`/admin-state`)
             return res.data
         }
     })
@@ -21,10 +23,25 @@ const AdminProfile = () => {
             <div className="stats shadow my-8">
                 <div className="stat">
                     <div className="stat-figure text-secondary">
+                    <FaUsers className="text-2xl" />
+                    
+                    </div>
+                    <div className="stat-title">Tourists</div>
+                    <div className="stat-value">{state?.tourists}</div>
+                </div>
+                <div className="stat">
+                    <div className="stat-figure text-secondary">
+                    <FaUsersCog className="text-2xl" />
+                    </div>
+                    <div className="stat-title">Guides</div>
+                    <div className="stat-value">{state?.guides}</div>
+                </div>
+                <div className="stat">
+                    <div className="stat-figure text-secondary">
                     <MdOutlineAutoStories className="text-2xl "></MdOutlineAutoStories>
                     </div>
                     <div className="stat-title">Stories</div>
-                    <div className="stat-value">31K</div>
+                    <div className="stat-value">{state?.stories}</div>
                 </div>
 
                 <div className="stat">
@@ -32,26 +49,10 @@ const AdminProfile = () => {
                     <MdAddBusiness className="text-2xl" />
                     </div>
                     <div className="stat-title">Packages</div>
-                    <div className="stat-value">4,200</div>
+                    <div className="stat-value">{state?.packages}</div>
                 </div>
 
-                <div className="stat">
-                    <div className="stat-figure text-secondary">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            className="inline-block h-8 w-8 stroke-current">
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
-                        </svg>
-                    </div>
-                    <div className="stat-title">New Registers</div>
-                    <div className="stat-value">1,200</div>
-                </div>
+                
             </div>
             <div >
                 <img className="h-32 w-32 rounded-full object-cover p-1 " src={user?.photoURL} alt="Profile Image" />
