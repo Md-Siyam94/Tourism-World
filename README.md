@@ -1,6 +1,6 @@
 # Project Name : TourismWorld
 
-## Admin username: Md Siyam, Email: siyam8967@gmail.com, password: siyam.....
+## Admin username: Md Siyam, Email: siyam8947@gmail.com, password: siyam.....
 
 # Bullet points
 - user friendly
