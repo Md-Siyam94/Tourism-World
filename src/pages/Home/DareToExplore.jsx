@@ -13,7 +13,7 @@ const DareToExplore = () => {
             
             </div>
             <div className='flex-1'>
-                <img className='lg:h-[473px]' src={Image} alt="" />
+                <img className='lg:h-[473px]' src={Image} alt="Man with guiter" />
             </div>
         </div>
     );
