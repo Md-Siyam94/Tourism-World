@@ -17,7 +17,7 @@ const Footer = () => {
                 <nav>
                     <h6 className="footer-title">Social</h6>
                     <div className="grid grid-flow-col gap-4">
-                        <Link>
+                        <Link to="https://x.com/md_siyam_1">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="24"
@@ -29,7 +29,7 @@ const Footer = () => {
                             </svg>
                         </Link>
                         
-                        <Link>
+                        <Link to="https://www.facebook.com/profile.php?id=100049223240013">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="24"
