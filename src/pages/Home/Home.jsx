@@ -5,12 +5,13 @@ import Overview from "./Overview";
 import TravelGuide from "./TravelGuide";
 import ManageStories from "../Dashboard/Shared/ManageStories";
 import Community from "../Community/Community";
+import DareToExplore from "./DareToExplore";
 
 const Home = () => {
     return (
         <div >
             
-            <section className="min-h-screen">
+            <section className="">
                 <Hero></Hero>
             </section>
             <section className="max-w-6xl mx-auto">
@@ -19,14 +20,17 @@ const Home = () => {
             <section className="max-w-6xl mx-auto">
                 <TravelGuide></TravelGuide>
             </section>
+            <section className="max-w-screen-2xl mx-auto ">
+                <KeepUs></KeepUs>
+            </section>
             <section className="max-w-6xl mx-auto">
                 <Community></Community>
             </section>
             <section className="max-w-6xl mx-auto">
-                <KeepUs></KeepUs>
-            </section>
-            <section className="max-w-6xl mx-auto">
                 <JoinCommunity></JoinCommunity>
+            </section>
+            <section className="max-w-screen-2xl mx-auto ">
+                <DareToExplore></DareToExplore>
             </section>
         </div>
     );

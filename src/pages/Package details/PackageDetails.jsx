@@ -68,7 +68,7 @@ const PackageDetails = () => {
 
     }
     return (
-        <div className="max-w-7xl mx-auto pt-28 pb-28">
+        <div className="max-w-7xl px-7 mx-auto pt-28 pb-28">
 
             <div className="card bg-base-100  shadow-xl">
                 <figure>

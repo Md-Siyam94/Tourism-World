@@ -3,9 +3,9 @@ import DevImg from "../../assets/WhatsApp Image 2024-10-29 at 23.24.11_a5b649bc.
 
 const AboutUs = () => {
     return (
-        <div className="max-w-7xl mx-auto pb-20  pt-14">
+        <div className="max-w-7xl px-10 mx-auto pb-20  pt-14">
 
-            <div className="lg:w-[70%] w-full border mx-auto my-6 pb-6 rounded-2xl">
+            <div className=" w-full border mx-auto my-6 pb-6 rounded-2xl">
                 <div className="h-32  w-full bg-blue-100 rounded-tr-2xl rounded-tl-2xl">
 
                 </div>

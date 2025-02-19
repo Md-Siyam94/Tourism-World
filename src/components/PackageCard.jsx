@@ -20,12 +20,12 @@ const PackageCard = ({ tourPackage }) => {
                 <div className="card-body">
                     <h2 className="card-title  items-start">
                     {tripTitle}
-                        <div className="badge badge-warning"> {tourType}</div>
+                        <div className="badge text-white bg-[#1a73e8]"> {tourType}</div>
                     </h2>
                     <p>Price: {price} $</p>
                     <div className="card-actions justify-end">
 
-                        <div className="btn btn-info"><Link to={`/package-details/${_id}`}>View details</Link></div>
+                        <div className="px-10 py-3 rounded-full border-2 border-[#1a73e8] text-[#1a73e8] font-semibold hover:bg-[#1a73e8] hover:text-white"><Link to={`/package-details/${_id}`}>View details</Link></div>
                     </div>
                 </div>
             </div>

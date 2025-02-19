@@ -31,7 +31,7 @@ const AdminProfile = () => {
    
 
     return (
-        <div className="py-6">
+        <div className="py-6 ">
             <h2 className="text-lg my-4">Welcome <span className=" font-semibold">{user?.displayName} !</span></h2>
             <div>
                 {
@@ -71,7 +71,7 @@ const AdminProfile = () => {
                     </div>
                 }
             </div>
-            <div >
+            <div className="border-2 flex p-10 gap-6 bg-base-100 rounded-lg items-center">
                 <img className="h-32 w-32 rounded-full object-cover p-1 " src={user?.photoURL} alt="Profile Image" />
                 <div className="flex gap-9 ">
                     <div>

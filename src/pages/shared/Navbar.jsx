@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../custom hooks/useAuth";
 import { SiStarship } from "react-icons/si";
+import Theme from "../../components/Theme";
 
 
 const Navbar = () => {
@@ -25,7 +26,7 @@ const Navbar = () => {
     }
     return (
         <div>
-            <div className="navbar bg-info bg-opacity-20 px-16 fixed z-10">
+            <div className="navbar max-w-screen-2xl mx-auto bg-info bg-opacity-20 px-16 fixed z-10">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -50,16 +51,19 @@ const Navbar = () => {
                             }
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl"><SiStarship className="text-3xl text-red-400" /> TourismWorld</a>
+                    <Link to="/" className="flex gap-2 text-xl font-semibold"><SiStarship className="text-3xl  text-red-400" /> TourismWorld</Link>
                 </div>
 
-                <div className="navbar-end">
+                <div className="navbar-end items-center">
                     <div className="navbar-center hidden lg:flex mr-3">
                         <ul className="menu menu-horizontal px-1">
                             {
                                 links
                             }
                         </ul>
+                    </div>
+                    <div className="mr-6">
+                        <Theme></Theme>
                     </div>
                     {
                         user ? <div className="dropdown dropdown-end ">
@@ -79,6 +83,7 @@ const Navbar = () => {
                                 <li><button className="" onClick={handleLogOut}>Log Out</button></li>
                             </ul>
                         </div> : <div className="flex gap-2">
+                            
                             <button className="btn"> <Link to={"/login"}>Login </Link></button>
                             <button className="btn"> <Link to={"/sign-up"}>Sign up</Link></button>
                         </div>

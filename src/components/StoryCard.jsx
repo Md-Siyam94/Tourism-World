@@ -40,7 +40,7 @@ const StoryCard = ({ story, refetch }) => {
     const shareUrl = 'https://www.pakkamarwadi.tk/';
     return (
         <div>
-            <div className=" bg-base-100 w-[80%] mx-auto shadow-xl pt-6">
+            <div className={location.pathname === "/" ? " bg-base-100  mx-auto shadow-xl pt-6" : " bg-base-100 w-[50%] mx-auto shadow-xl pt-6"}>
                 <div className="flex justify-between items-start mx-6">
                     <div className="flex gap-3 mb-8 items-center ">
                         <img className="h-10 w-10 rounded-full object-cover" src={posterImage} alt="" />

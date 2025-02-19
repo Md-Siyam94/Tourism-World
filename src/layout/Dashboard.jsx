@@ -6,6 +6,7 @@ import { RiUserAddLine } from "react-icons/ri";
 import { FaBookBookmark } from "react-icons/fa6";
 import useAdmin from "../custom hooks/useAdmin";
 import useIsGuide from "../custom hooks/useIsGuide";
+import { SiStarship } from "react-icons/si";
 
 
 const Dashboard = () => {
@@ -16,7 +17,9 @@ const Dashboard = () => {
     return (
         <div>
             <div className="flex ">
-                <div className="w-64 min-h-screen bg-teal-100 bg-opacity-60">
+                
+                <div className="w-64 p-4 overflow-y-auto min-h-screen  bg-teal-100 bg-opacity-60">
+                    <Link to="/" className="flex gap-2 text-xl font-semibold mb-4"><SiStarship className="text-3xl  text-red-400" /> TourismWorld</Link>
                     <ul className="menu">
                         {
                             isAdmin ? <>

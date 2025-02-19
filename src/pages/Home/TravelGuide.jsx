@@ -7,10 +7,10 @@ const TravelGuide = () => {
     return (
         <div className='pb-20 '>
             <div>
-                <h1 className='text-5xl font-thin text-center my-2 text-info'>Tourism and Travel Guide</h1>
+                <h1 className='text-5xl font-thin text-center my-2 font-serif'>Tourism and Travel Guide</h1>
                 <p className='w-[70%] text-center mx-auto my-4 opacity-70'>Tourism and travel have become integral aspects of modern life, providing people with opportunities to explore new cultures, unwind in beautiful destinations, and create lifelong memories.</p>
             </div>
-            <div className='mt-16'>
+            <div className='mt-10'>
             <Tabs>
                 <TabList >
                     <Tab> Our Packages</Tab>

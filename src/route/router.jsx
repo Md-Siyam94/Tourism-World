@@ -32,8 +32,7 @@ import Profile from "../components/Profile";
     {
       path: "/",
       element: <MainLayout></MainLayout>,
-      // TODO: enable error component
-      // errorElement: <Error></Error>,
+      errorElement: <Error></Error>,
       children: [
         {
             path: "/",
@@ -75,7 +74,7 @@ import Profile from "../components/Profile";
     {
       path:"/dashboard",
       element: <PrivetRoute> <Dashboard></Dashboard></PrivetRoute>,
-      // errorElement: <Error></Error>,
+      errorElement: <Error></Error>,
       children: [
         // admin routes
         {
