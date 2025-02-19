@@ -11,7 +11,7 @@ const KeepUs = () => {
                  src={KeepusImage} alt="" />
             </div>
             <div className="flex-1 sm:mt-6">
-                <h1 className="text-5xl font-serif ">Go Exotic Palces!</h1>
+                <h1 className="text-3xl lg:text-5xl font-serif ">Go Exotic Palces!</h1>
                 <p className="my-4 opacity-70">Planning your next adventure? Let us be your guide! Whether you're dreaming of serene beaches, bustling cities, or breathtaking mountains, we are here to help you explore the destinations that excite you the most. Save your favorite locations, track your travel plans, and receive personalized recommendations to make every trip unforgettable.</p>
                 <Link to={"https://www.booking.com"}>
                 <motion.button 
