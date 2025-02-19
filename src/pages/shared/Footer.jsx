@@ -9,7 +9,7 @@ const Footer = () => {
                 <aside>
                 <SiStarship className="text-3xl text-red-400" />
                     <p>
-                        TourismWorld Ltd.
+                        <span className="text-xl font-semibold">TourismWorld Ltd.</span>
                         <br />
                         Providing reliable tech since 1992
                     </p>

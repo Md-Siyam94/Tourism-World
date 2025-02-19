@@ -6,6 +6,7 @@ import TravelGuide from "./TravelGuide";
 import ManageStories from "../Dashboard/Shared/ManageStories";
 import Community from "../Community/Community";
 import DareToExplore from "./DareToExplore";
+import Latest from "./Latest";
 
 const Home = () => {
     return (
@@ -31,6 +32,9 @@ const Home = () => {
             </section>
             <section className="max-w-screen-2xl mx-auto ">
                 <DareToExplore></DareToExplore>
+            </section>
+            <section className="max-w-screen-2xl mx-auto ">
+                <Latest></Latest>
             </section>
         </div>
     );
